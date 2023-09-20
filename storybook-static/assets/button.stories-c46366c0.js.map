@@ -1,0 +1,1 @@
+{"version":3,"file":"button.stories-c46366c0.js","sources":["../../src/components/button/button.tsx"],"sourcesContent":["export const Button = () => {\n  return (\n    <button>\n      teste\n    </button>\n  )\n}\n"],"names":["Button","jsx"],"mappings":"iHAAO,MAAMA,EAAS,IAElBC,EAAA,IAAC,UAAO,SAER,OAAA,CAAA;;"}
