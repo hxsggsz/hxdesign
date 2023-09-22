@@ -1,14 +1,14 @@
-@import "../../styles/variables.scss";
+@use "../../styles/variables";
 
 .defaultBtn, .grass {
   cursor: pointer;
   padding: 0.4rem 1rem;
-  border: 2px solid $black;
+  border: 2px solid variables.$black;
   position: relative;
 }
 
 .defaultBtn {
-  background: $btnDefault;
+  background: variables.$btnDefault;
   
   &::before, &:hover::before {
     content: '';
@@ -20,22 +20,22 @@
   }
   
   &::before {
-    background: $btnGradient;
+    background: variables.$btnGradient;
   }
 
   &:hover {
-    background: $btnHover;
-    color: $fontHover;
+    background: variables.$btnHover;
+    color: variables.$fontHover;
   }
 
   &:hover::before {
-    background: $btnGradientHover;
+    background: variables.$btnGradientHover;
   }
 
   &:disabled {
-    background: $btnDisable;
+    background: variables.$btnDisable;
     cursor: not-allowed;
-    color: $fontDisable;
+    color: variables.$fontDisable;
   }
 
   &:disabled::before {
@@ -44,7 +44,7 @@
 }
 
 .grass {
-  background-color: $btnDefault;
+  background-color: variables.$btnDefault;
   background-image: url('src/components/button/assets/grass.jpg');
   background-size: contain;
   background-position: center center;

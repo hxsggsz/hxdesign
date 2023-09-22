@@ -1,5 +1,5 @@
-import { ButtonProps } from "./button.types";
-import scss from "./button.module.scss";
+import { ButtonProps } from "./Button.types";
+import scss from "./Button.module.scss";
 import { useState } from "react";
 import minecraftClickSound from "./assets/minecraft_click.mp3";
 import classNames from "classnames";
@@ -9,7 +9,7 @@ export const Button = (props: ButtonProps) => {
 
   const [isClicked, setIsClicked] = useState(false);
 
-  const inputClasses = classNames({
+  const btnClasses = classNames({
     [scss.grass]: props.variant,
     [scss.defaultBtn]: !props.variant,
   });
@@ -23,7 +23,7 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       {...props}
-      className={inputClasses}
+      className={btnClasses}
       aria-pressed={isClicked}
       aria-disabled={props.disabled}
       onClickCapture={handleClickCapture}

@@ -14,12 +14,13 @@ export default {
   transformIgnorePatterns: ["!node_modules/", "!.next/"],
   roots: ["<rootDir>/src/"],
   testMatch: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[tj]s?(x)"],
-  // moduleNameMapper: {
-  //   "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
-  //   "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
-  // },
+  moduleNameMapper: {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/assetsTransformer.js",
+    "\\.(css|scss)$": "<rootDir>/assetsTransformer.js",
+  },
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  // automock: true,
 
   // Stop running tests after `n` failures
   // bail: 0,

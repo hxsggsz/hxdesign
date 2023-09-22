@@ -1,13 +1,7 @@
-import { Button } from "./components/button/button"
+import "./styles/base.scss";
 
 function App() {
-
-  return (
-    <>
-      minecraft design system
-      <Button />
-    </>
-  )
+  return <>minecraft design system</>;
 }
 
-export default App
+export default App;
