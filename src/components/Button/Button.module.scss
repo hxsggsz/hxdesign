@@ -45,11 +45,11 @@
 
 .grass {
   background-color: variables.$btnDefault;
-  background-image: url('src/components/button/assets/grass.jpg');
+  background-image: url('./assets/grass.jpg');
   background-size: contain;
   background-position: center center;
 
   &:active {
-    background-image: url('src/components/button/assets/variant-grass.jpg');
+    background-image: url('./assets/variant-grass.jpg');
   }
 }
