@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 
 const meta = {
-  title: "button",
+  title: "Button",
   component: Button,
 } satisfies Meta<typeof Button>;
 
@@ -13,11 +13,10 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: "minecraft",
-    variant: false,
   },
 };
 
-export const Secondary: Story = {
+export const Grass: Story = {
   args: {
     children: "minecraft",
     variant: true,

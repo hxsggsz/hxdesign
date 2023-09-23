@@ -3,11 +3,25 @@ $fontFamily: 'MinecraftiaRegular';
 $outlineColor: #fff200;
 $black: #000000;
 $white: #ffffff;
-$fontColor: #eaeaea;
+
+// button
 $btnDefault: #4D4D4D;
 $btnGradient: #575757;
 $btnGradientHover: #586195;
 $btnHover: #7c86bc;
 $btnDisable: #333333;
+
+// font
+$fontColor: #eaeaea;
 $fontHover: #e5e6c9;
 $fontDisable: #999999;
+
+// switch
+$bg: #423f40;
+$bgChecked: #7e7e83;
+$check: #c5c5c5;
+$lineCenter: #423f40;
+$lineCenterChecked: #7f7d7e;
+$lineCenterActive: #14620c;
+$bgActive: #4b8833;
+$btnActive: #3da01a;
