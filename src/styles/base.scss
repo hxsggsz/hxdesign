@@ -60,6 +60,10 @@ select {
   font: inherit;
 }
 
+input, button {
+  outline-offset: 4px;
+}
+
 button {
   border: none;
   background: none;
@@ -68,6 +72,4 @@ button {
   border-radius: 0;
   font-size: 1.2rem;
   color: $fontColor;
-  outline-color: $outlineColor;
-  outline-offset: 4px;
 }
