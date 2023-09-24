@@ -1,7 +1,7 @@
 import { ButtonProps } from "./Button.types";
 import scss from "./Button.module.scss";
 import { useState } from "react";
-import minecraftClickSound from "./assets/minecraft_click.mp3";
+import minecraftClickSound from "../../assets/minecraft_click.mp3";
 import classNames from "classnames";
 
 export const Button = (props: ButtonProps) => {

@@ -12,6 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    check: true,
+    checked: true,
+    setChecked: () => alert("click on switch!"),
   },
 };
