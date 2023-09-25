@@ -19,7 +19,7 @@ export const Primary: Story = {
 export const Grass: Story = {
   args: {
     children: "minecraft",
-    variant: true,
+    variant: "grass",
   },
   parameters: {
     a11y: {
@@ -35,5 +35,11 @@ export const Grass: Story = {
       options: {},
       manual: true,
     },
+  },
+};
+
+export const Slider: Story = {
+  args: {
+    variant: "slider"
   },
 };

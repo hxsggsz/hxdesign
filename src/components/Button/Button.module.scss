@@ -1,7 +1,10 @@
 @use "../../styles/variables";
 
-.defaultBtn, .grass {
+.defaultBtn, .grass, .slider {
   cursor: pointer;
+}
+
+.defaultBtn, .grass {
   padding: 0.4rem 1rem;
   border: 2px solid variables.$black;
   position: relative;
@@ -52,4 +55,9 @@
   &:active {
     background-image: url('./assets/variant-grass.jpg');
   }
+}
+
+.slider {
+  background: variables.$check;
+  padding: 1rem 0.4rem;
 }
