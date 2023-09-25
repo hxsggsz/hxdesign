@@ -10,9 +10,18 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const SwitchComponent: Story = {
   args: {
     checked: true,
+    checkbox: false,
     setChecked: () => alert("click on switch!"),
+  },
+};
+
+export const CheckboxComponent: Story = {
+  args: {
+    checked: true,
+    checkbox: true,
+    setChecked: () => {},
   },
 };

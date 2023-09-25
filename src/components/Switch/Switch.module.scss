@@ -43,3 +43,54 @@
     background: variables.$lineCenter;
   }
 }
+
+@mixin animate($animation,$duration,$method,$times){
+  animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name){
+  @keyframes #{$name}{
+      @content;
+  }
+}
+
+.checkbox {
+  width: 32px;
+  height: 32px;
+  background: variables.$bg;
+  appearance: none;
+  border: 2px solid variables.$black;
+
+  &:active {
+    @include animate(fade-out, 100ms, ease-in-out, 1);
+  }
+
+  &:checked {
+    background-image: url('../../assets/grass.jpg');
+    background-size: contain;
+    background-position: center center;
+
+    &:active {
+      @include animate(fade-in, 100ms, ease-in-out, 1);
+    }
+  }
+  @include keyframes(fade-in) {
+    0% {
+      transform: scale(0.1);
+    }
+    
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @include keyframes(fade-out) {
+    0% {
+      transform: scale(1);
+    }
+    
+    100% {
+      transform: scale(0.1);
+    }
+  }
+}

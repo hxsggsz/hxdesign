@@ -16,6 +16,7 @@ describe("Switch", () => {
 
       expect(switchComponent).not.toBeChecked();
       expect(switchComponent).toBeInTheDocument();
+      expect(switchComponent.getAttribute('aria-label')).toBe('switch off');
     });
 
     it("renders the switch on when checked={true}", () => {
@@ -25,6 +26,16 @@ describe("Switch", () => {
 
       expect(switchComponent).toBeChecked();
       expect(switchComponent).toBeInTheDocument();
+    });
+
+    it("renders the switch as checkbox when checkbox={true}", () => {
+      render(<Switch checkbox checked={false} setChecked={() => {}} />);
+
+      const switchComponent = screen.getByRole("checkbox");
+
+      expect(switchComponent).not.toBeChecked();
+      expect(switchComponent).toBeInTheDocument();
+      expect(switchComponent.getAttribute('aria-label')).toBe('checkbox off');
     });
 
     it("should not have basic accessibility issues", async () => {
