@@ -26,6 +26,7 @@ describe("Switch", () => {
 
       expect(switchComponent).toBeChecked();
       expect(switchComponent).toBeInTheDocument();
+      expect(switchComponent.getAttribute('aria-label')).toBe('switch on');
     });
 
     it("renders the switch as checkbox when checkbox={true}", () => {
