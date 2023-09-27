@@ -37,9 +37,3 @@ export const Grass: Story = {
     },
   },
 };
-
-export const Slider: Story = {
-  args: {
-    variant: "slider"
-  },
-};

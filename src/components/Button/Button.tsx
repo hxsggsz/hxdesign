@@ -12,7 +12,6 @@ export const Button = (props: ButtonProps) => {
   const btnClasses = classNames({
     [scss.defaultBtn]: !props.variant,
     [scss.grass]: props.variant === "grass",
-    [scss.slider]: props.variant === "slider",
   });
 
   function handleClickCapture() {

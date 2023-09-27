@@ -1,6 +1,6 @@
 @use "../../styles/variables";
 
-.defaultBtn, .grass, .slider {
+.defaultBtn, .grass {
   cursor: pointer;
 }
 
@@ -55,9 +55,4 @@
   &:active {
     background-image: url('./assets/variant-grass.jpg');
   }
-}
-
-.slider {
-  background: variables.$check;
-  padding: 1rem 0.4rem;
 }
