@@ -13,7 +13,7 @@ import { SliderProps } from "./Slider.types";
 export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
   const buttonSize = 12;
 
-  const buttonX = useMotionValue(0);
+  const buttonX = useMotionValue(props.defaultValue ?? 0);
   const progress = useTransform(buttonX, (v) => v + buttonSize / 2);
   const background = useMotionTemplate`
     linear-gradient(90deg, #423f40 ${progress.get()}px, #7f7d7e 0)`;
@@ -38,31 +38,30 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
     const newProgress =
       (middleButton - progressBarBounds.x) / progressBarBounds.width;
-
     setValue(Math.round(newProgress * (max - min)));
   }
 
   function handlePointerDown(ev: React.PointerEvent<HTMLDivElement>) {
     if (!progressBarRef.current) return;
+
     const { left, width } = progressBarRef.current.getBoundingClientRect();
     const position = ev.pageX - left;
     const newProgress = Math.max(0, Math.min(position / width, 1));
     const newValue = Math.round(newProgress * (max - min));
 
-    animate(buttonX, newProgress * width);
-
     setValue(newValue);
+    animate(buttonX, newProgress * width);
   }
 
   function handleKeyDown(ev: React.KeyboardEvent<HTMLButtonElement>) {
     switch (ev.key) {
       case "ArrowLeft":
-        if (value <= min) return;
+        if (value === min) return;
         setValue((prev) => (prev -= 1));
         break;
 
       case "ArrowRight":
-        if (value >= max) return;
+        if (value === max) return;
         setValue((prev) => (prev += 1));
         break;
 
@@ -75,26 +74,33 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
     if (!progressBarRef.current) return;
     const newProgress = value / (max - min);
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
-    console.log({ value, aa: newProgress * progressBarBounds.width });
+
     buttonX.set(newProgress * progressBarBounds.width);
   }, [buttonX, max, min, value]);
 
   useEffect(() => {
     if (props.setSliderValue) props.setSliderValue(value);
-  }, [props, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <div
+      role="slider"
+      aria-valuemin={min}
+      aria-valuemax={max}
       ref={maxDragAreaRef}
+      aria-valuenow={value}
       className={scss.track}
+      aria-orientation="horizontal"
       style={{ background: background.get() }}
+      aria-valuetext={`the value of this slider is: ${value}`}
     >
       <div
         className={scss.trackProgress}
         ref={progressBarRef}
         style={{
-          left: buttonSize / 2,
-          right: buttonSize / 2,
+          left: buttonSize,
+          right: buttonSize,
         }}
       />
 
@@ -110,6 +116,7 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
         dragConstraints={maxDragAreaRef}
         whileDrag={{ cursor: "grabbing" }}
         onClickCapture={handleClickCapture}
+        aria-label="button that trigger the slider"
       />
       <div onPointerDown={handlePointerDown} className={scss.trackClick} />
     </div>
