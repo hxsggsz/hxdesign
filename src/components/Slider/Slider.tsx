@@ -16,14 +16,13 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
   const buttonX = useMotionValue(0);
   const progress = useTransform(buttonX, (v) => v + buttonSize / 2);
   const background = useMotionTemplate`
-    linear-gradient(90deg, #423f40 ${progress}px, #7f7d7e 0)`;
+    linear-gradient(90deg, #423f40 ${progress.get()}px, #7f7d7e 0)`;
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const maxDragAreaRef = useRef<HTMLDivElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setValue] = useState(0);
+  const [value, setValue] = useState(props.defaultValue ?? 0);
 
   const clickSound = new Audio(minecraftClickSound);
 
@@ -40,37 +39,49 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
     const newProgress =
       (middleButton - progressBarBounds.x) / progressBarBounds.width;
 
-    if (!props.setSliderValue) {
-      setValue(Math.round(newProgress * (max - min)));
-      return;
-    }
-
-    props.setSliderValue(Math.round(newProgress * (max - min)));
+    setValue(Math.round(newProgress * (max - min)));
   }
 
   function handlePointerDown(ev: React.PointerEvent<HTMLDivElement>) {
     if (!progressBarRef.current) return;
     const { left, width } = progressBarRef.current.getBoundingClientRect();
     const position = ev.pageX - left;
-    const newProgress = position / width;
+    const newProgress = Math.max(0, Math.min(position / width, 1));
+    const newValue = Math.round(newProgress * (max - min));
 
-    if (!props.setSliderValue) {
-      setValue(Math.round(newProgress * (max - min)));
-      console.log(Math.round(newProgress * (max - min)));
-      return;
-    }
-
-    props.setSliderValue(Math.round(newProgress * (max - min)));
     animate(buttonX, newProgress * width);
+
+    setValue(newValue);
+  }
+
+  function handleKeyDown(ev: React.KeyboardEvent<HTMLButtonElement>) {
+    switch (ev.key) {
+      case "ArrowLeft":
+        if (value <= min) return;
+        setValue((prev) => (prev -= 1));
+        break;
+
+      case "ArrowRight":
+        if (value >= max) return;
+        setValue((prev) => (prev += 1));
+        break;
+
+      default:
+        break;
+    }
   }
 
   useEffect(() => {
     if (!progressBarRef.current) return;
-    const newProgress = (props.defaultValue ?? 0) / (max - min);
+    const newProgress = value / (max - min);
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
-
+    console.log({ value, aa: newProgress * progressBarBounds.width });
     buttonX.set(newProgress * progressBarBounds.width);
-  }, [buttonX, max, min, props.defaultValue]);
+  }, [buttonX, max, min, value]);
+
+  useEffect(() => {
+    if (props.setSliderValue) props.setSliderValue(value);
+  }, [props, value]);
 
   return (
     <div
@@ -86,16 +97,18 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
           right: buttonSize / 2,
         }}
       />
+
       <motion.button
         drag="x"
         ref={buttonRef}
         dragElastic={false}
         onDrag={handleDrag}
-        whileDrag={{ cursor: "grabbing" }}
         dragMomentum={false}
         className={scss.button}
         style={{ x: buttonX }}
+        onKeyDown={handleKeyDown}
         dragConstraints={maxDragAreaRef}
+        whileDrag={{ cursor: "grabbing" }}
         onClickCapture={handleClickCapture}
       />
       <div onPointerDown={handlePointerDown} className={scss.trackClick} />
