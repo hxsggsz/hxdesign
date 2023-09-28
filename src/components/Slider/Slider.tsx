@@ -6,7 +6,6 @@ import {
   useTransform,
 } from "framer-motion";
 import scss from "./Slider.module.scss";
-import minecraftClickSound from "../../assets/minecraft_click.mp3";
 import { useEffect, useRef, useState } from "react";
 import { SliderProps } from "./Slider.types";
 
@@ -21,14 +20,10 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const maxDragAreaRef = useRef<HTMLDivElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
-
-  const [value, setValue] = useState(props.defaultValue ?? 0);
-
-  const clickSound = new Audio(minecraftClickSound);
-
-  function handleClickCapture() {
-    clickSound.play();
-  }
+  // if user don't have selected a slider value and you're using defaultValue, the sliderValue prop must be undefined
+  const [value, setValue] = useState(
+    props.sliderValue ?? props.defaultValue ?? 0
+  );
 
   function handleDrag() {
     if (!buttonRef.current || !progressBarRef.current) return;
@@ -56,12 +51,12 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
   function handleKeyDown(ev: React.KeyboardEvent<HTMLButtonElement>) {
     switch (ev.key) {
       case "ArrowLeft":
-        if (value === min) return;
+        if (value <= min) return;
         setValue((prev) => (prev -= 1));
         break;
 
       case "ArrowRight":
-        if (value === max) return;
+        if (value >= max) return;
         setValue((prev) => (prev += 1));
         break;
 
@@ -110,15 +105,19 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
         dragElastic={false}
         onDrag={handleDrag}
         dragMomentum={false}
-        className={scss.button}
         style={{ x: buttonX }}
+        className={scss.button}
         onKeyDown={handleKeyDown}
+        data-testid="trigger-button"
         dragConstraints={maxDragAreaRef}
         whileDrag={{ cursor: "grabbing" }}
-        onClickCapture={handleClickCapture}
         aria-label="button that trigger the slider"
       />
-      <div onPointerDown={handlePointerDown} className={scss.trackClick} />
+      <div
+        data-testid="click-slider"
+        onPointerDown={handlePointerDown}
+        className={scss.trackClick}
+      />
     </div>
   );
 };
