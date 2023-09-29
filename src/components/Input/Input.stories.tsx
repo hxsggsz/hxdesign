@@ -15,6 +15,12 @@ export const Primary: Story = {
   },
 }
 
+export const Disabled: Story = {
+  args: {
+    disabled: true
+  },
+}
+
 export const CustomFont: Story = {
   args: {
     fontSize: 1.8

@@ -7,9 +7,14 @@
   padding-left: 0.4rem;
   outline: none;
   transition: 100ms ease-in-out;
-
+  
   &:focus {
     border: 4px solid variables.$white;
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+    background: variables.$lineCenter;
   }
 
   &::selection {
