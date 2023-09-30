@@ -1,4 +1,4 @@
-@import "variables.scss";
+@use "variables.scss";
 /* Box sizing rules */
 *,
 *::before,
@@ -31,13 +31,16 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 
+body, html {
+  font-size: 62.5%;
+}
+
 /* Set core body defaults */
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-size: 62.5%;
-  font-family: $fontFamily;
+  font-family: variables.$fontFamily;
 }
 
 /* A elements that don't have a class get default styles */
@@ -64,6 +67,18 @@ input, button {
   outline-offset: 4px;
 }
 
+ul {
+  list-style: none;
+  text-decoration: none;
+  all: unset;
+  
+  li {
+    all: unset;
+    font-size: 1.6rem;
+    color: variables.$white;
+  }
+}
+
 button {
   border: none;
   background: none;
@@ -71,5 +86,5 @@ button {
   margin: 0;
   border-radius: 0;
   font-size: 1.2rem;
-  color: $fontColor;
+  color: variables.$fontColor;
 }

@@ -2,9 +2,7 @@
 
 .defaultBtn, .grass {
   cursor: pointer;
-}
-
-.defaultBtn, .grass {
+  font-size: 2.4rem;
   padding: 0.4rem 1rem;
   border: 2px solid variables.$black;
   position: relative;
@@ -19,7 +17,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0.2rem;
+    height: 0.6rem;
   }
   
   &::before {
