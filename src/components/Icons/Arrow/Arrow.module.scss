@@ -1,0 +1,15 @@
+.arrow {
+  cursor: pointer;
+  
+  &[data-orientation=top] {
+    transform: rotate(-90deg);
+  }
+  
+  &[data-orientation=down] {
+    transform: rotate(90deg);
+  }
+  
+  &[data-orientation=left] {
+    transform: rotate(180deg);
+  }
+}
