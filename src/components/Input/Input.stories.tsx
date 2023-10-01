@@ -1,28 +1,48 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from './Input';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Input } from "./Input";
+import { Button } from "../Button/Button";
+import { Arrow } from "../Icons/Arrow/Arrow";
 
 const meta = {
-  title: 'Input',
-  component: Input,
-} satisfies Meta<typeof Input>;
+  title: "Design System/components/Input",
+  component: Input.Root,
+} satisfies Meta<typeof Input.Root>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Input.Root>;
 
 export const Primary: Story = {
   args: {
+    children: <Input.Input />,
   },
-}
+};
+
+export const Actions: Story = {
+  args: {
+    children: [
+      <>
+        <Input.Actions>
+          <Arrow size={32} outline />
+        </Input.Actions>
+        <Input.Input />
+        <Input.Actions>
+          <Button>click 1</Button>
+          <Button>click 2</Button>
+        </Input.Actions>
+      </>,
+    ],
+  },
+};
 
 export const Disabled: Story = {
   args: {
-    disabled: true
+    children: <Input.Input disabled />,
   },
-}
+};
 
-export const CustomFont: Story = {
+export const CustomFontSize: Story = {
   args: {
-    fontSize: 1.8
+    children: <Input.Input fontSize={1.8} />,
   },
-}
+};

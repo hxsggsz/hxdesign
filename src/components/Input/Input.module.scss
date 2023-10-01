@@ -1,26 +1,54 @@
 @use "../../styles/variables";
 
-.input {
-  background: variables.$black;
-  color: variables.$white;
-  border: 4px solid variables.$btnDefault;
-  padding: 0.4rem;
-  outline: none;
+.inputVariant {
+  cursor: text;
+  padding: 0.2rem;
+  background: variables.$white;
+  display: flex;
+  border: 4px solid variables.$black;
   width: 100%; 
-  min-height: 3.8rem;
   transition: 100ms ease-in-out;
   
-  &:focus {
+  &:focus-within {
+    border: 4px solid variables.$btnDefault
+  }
+
+}
+
+.input {
+  cursor: text;
+  padding: 0.2rem;
+  background: variables.$black;
+  display: flex;
+  border: 4px solid variables.$btnDefault;
+  width: 100%; 
+  transition: 100ms ease-in-out;
+  
+  &:focus-within {
     border: 4px solid variables.$white;
   }
   
-  &:disabled {
-    cursor: not-allowed;
-    background: variables.$lineCenter;
+  .hidden {
+    outline: none;
+    padding: 0.4rem 0;
+    border: none;
+    background: none;
+    width: 100%;
+    color: variables.$white;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &::selection {
+      background-color: variables.$white;
+      color: variables.$btnHover;
+    }
   }
 
-  &::selection {
-    background-color: variables.$white;
-    color: variables.$btnHover;
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
