@@ -8,21 +8,23 @@ import scss from "./Arrow.module.scss";
 export const Arrow = ({ size = 24, ...props }: ArrowProps) => {
   const renderDefaultArrow = () => (
     <img
-      src={props.outline ? arrowOutlined : arrow}
       width={size}
       height={size}
+      alt="an arrow icon"
       className={scss.arrow}
       data-orientation={props.orientation}
+      src={props.outline ? arrowOutlined : arrow}
     />
   );
 
   const renderVariantArrow = () => (
     <img
-      src={props.outline ? variantArrowOutlined : variantArrow}
       width={size}
       height={size}
+      alt="an arrow icon"
       className={scss.arrow}
       data-orientation={props.orientation}
+      src={props.outline ? variantArrowOutlined : variantArrow}
     />
   );
   return props.variant ? renderVariantArrow() : renderDefaultArrow();

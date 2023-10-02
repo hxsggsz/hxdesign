@@ -1,6 +1,7 @@
-export interface ArrowProps {
-  size?: number;
+import { IconProps } from "../Icons.types";
+
+export interface ArrowProps extends IconProps {
   variant?: boolean;
-  orientation?: "left" | "top" | "down";
+  orientation?: "left" | "up" | "down";
   outline?: boolean;
 }

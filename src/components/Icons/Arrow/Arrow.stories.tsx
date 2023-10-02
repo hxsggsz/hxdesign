@@ -35,7 +35,7 @@ export const Outline: Story = {
 export const Top: Story = {
   args: {
     size: 32,
-    orientation: "top",
+    orientation: "up",
   },
 };
 
