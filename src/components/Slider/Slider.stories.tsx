@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Slider } from "./Slider";
 
 const meta = {
-  title: "Slider",
+  title: "Design System/components/Slider",
   component: Slider,
 } satisfies Meta<typeof Slider>;
 

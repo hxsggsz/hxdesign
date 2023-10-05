@@ -1,9 +1,18 @@
 @use "../../styles/variables";
 
-.defaultBtn, .grass {
+.defaultBtn, .grass, .none {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  justify-content: center;
+  white-space: nowrap;
   font-size: 2.4rem;
   padding: 0.4rem 1rem;
+}
+
+.defaultBtn, .grass {
   border: 2px solid variables.$black;
   position: relative;
 }

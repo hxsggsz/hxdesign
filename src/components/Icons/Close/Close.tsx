@@ -4,6 +4,11 @@ import { CloseProps } from "./Close.types";
 
 export const Close = ({ size = 24, variant }: CloseProps) => {
   return (
-    <img width={size} height={size} src={variant ? closeVariant : close} />
+    <img
+      width={size}
+      height={size}
+      style={{ userSelect: "none" }}
+      src={variant ? closeVariant : close}
+    />
   );
 };

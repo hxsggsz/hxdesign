@@ -8,39 +8,50 @@
     background: variables.$black;
     display: flex;
     flex-direction: column;
-    border-bottom: 4px solid variables.$btnDefault;
-    border-left: 4px solid variables.$btnDefault;
-    border-right: 4px solid variables.$btnDefault;
+    border: 4px solid variables.$btnDefault;
+    border-top: 0;
+    overflow-x: hidden;
     
-    &[data-focus=true] {
-      border-bottom: 4px solid variables.$white;
-      border-left: 4px solid variables.$white;
-      border-right: 4px solid variables.$white;
+    &[data-open=true] {
+      border: 4px solid variables.$white;
+      border-top: 0;
     }
     
     .item {
       transition: 100ms ease-in-out;
-      padding: 0.4rem;
+      padding: 0.4rem 0.6rem;
       cursor: pointer;
       border-bottom: 4px solid variables.$btnDefault;
       font-size: 2.4rem;
-
-      &[data-focus=true] {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      
+      &[data-open=true] {
         border-bottom: 4px solid variables.$white;
       }
-
-      &:hover {
+      
+      &:focus-within, &:hover {
         background: variables.$white;
         color: variables.$black;
       }
-      
-      &:active {
-        color: variables.$white;
-        background: variables.$bg;
-      }
+    
 
       &:last-child {
         border-bottom: none;
+      }
+
+      .button {
+        width: 100%;
+        display: block;
+        font-size: 2.4rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        text-align: start;
+
+        color: inherit;
       }
     }
   }

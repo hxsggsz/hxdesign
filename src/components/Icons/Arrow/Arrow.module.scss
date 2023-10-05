@@ -1,6 +1,7 @@
 .arrow {
   cursor: pointer;
-  
+  user-select: none;
+
   &[data-orientation=top] {
     transform: rotate(-90deg);
   }
