@@ -37,7 +37,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
       case "ArrowDown":
         ev.preventDefault();
         console.log("aaa");
-        return document.querySelectorAll("button")[index - 1]?.autofocus();
+        return document.querySelectorAll("button")[index - 1]?.focus();
         break;
 
       case "ArrowUp":
