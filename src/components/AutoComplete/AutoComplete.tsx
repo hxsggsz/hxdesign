@@ -64,7 +64,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
         role="option"
         data-open={isOpen}
         className={scss.item}
-        aria-selected={search !== ""}
+        aria-selected={search == list.item}
       >
         <button
           tabIndex={index === 0 ? 0 : -1}
