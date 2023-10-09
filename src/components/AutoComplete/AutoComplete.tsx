@@ -64,7 +64,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
         role="option"
         data-open={isOpen}
         className={scss.item}
-        aria-selected={search == list.item}
+        aria-selected={search === list.item}
       >
         <button
           tabIndex={index === 0 ? 0 : -1}
@@ -116,16 +116,17 @@ export const AutoComplete = (props: AutoCompleteProps) => {
           placeholder={props.placeholder}
         />
         <Input.Actions>
-          {isOpen && (
+          {search && (
             <Button
               id="cb1-button"
               variant="none"
               onClick={clearInput}
               aria-expanded={isOpen}
+              data-testid="btn-clear"
               aria-controls="cb1-listbox"
               aria-label="indicator of autocomplete"
             >
-              <Close variant />
+              <Close size={32} variant />
             </Button>
           )}
         </Input.Actions>
