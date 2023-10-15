@@ -84,6 +84,7 @@ describe("<AutoComplete/>", () => {
         await waitFor(() =>
           expect(screen.getByText(/quackity/i)).toBeInTheDocument()
         );
+
         userEvent.click(input);
 
         await waitForElementToBeRemoved(screen.getByText(/quackity/i));
@@ -146,6 +147,20 @@ describe("<AutoComplete/>", () => {
       await waitForElementToBeRemoved(screen.getByText(/quackity/i));
 
       expect(screen.queryByText(/quackity/i)).not.toBeInTheDocument();
+    });
+  });
+  describe("when click on a option", () => {
+    it("calls the selected function", async () => {
+      render(<AutoComplete list={list} />);
+
+      const input = screen.getByRole("combobox");
+
+      fireEvent.click(input);
+      expect(await screen.findByText(/quackity/i)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText(/quackity/i));
+
+      await waitFor(() => expect(list[0].onSelect).toBeCalledTimes(1));
     });
   });
 });
