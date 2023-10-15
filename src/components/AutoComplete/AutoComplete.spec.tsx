@@ -41,6 +41,11 @@ describe("<AutoComplete/>", () => {
       expect(results).toHaveNoViolations();
     });
 
+    it("hiddes the `clear` button if there is no text search", () => {
+      render(<AutoComplete list={[]} />);
+      expect(screen.queryByLabelText(/clear search/i)).not.toBeInTheDocument();
+    });
+
     it("has correctly aria attributes", () => {
       render(<AutoComplete list={[]} />);
 
@@ -54,6 +59,34 @@ describe("<AutoComplete/>", () => {
       expect(expanded).toBe("false");
       expect(controls).toBe("cb1-listbox");
       expect(label).toBe("input text");
+    });
+  });
+
+  describe("when click on a option", () => {
+    it("calls the selected function", async () => {
+      render(<AutoComplete list={list} />);
+
+      const input = screen.getByRole("combobox");
+
+      fireEvent.click(input);
+      expect(await screen.findByText(/quackity/i)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText(/quackity/i));
+
+      await waitFor(() => expect(list[0].onSelect).toBeCalledTimes(1));
+    });
+
+    it("closes the list", async () => {
+      render(<AutoComplete list={list} />);
+
+      const input = screen.getByRole("combobox");
+
+      fireEvent.click(input);
+      expect(await screen.findByText(/quackity/i)).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText(/quackity/i));
+
+      expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     });
   });
 
@@ -116,19 +149,19 @@ describe("<AutoComplete/>", () => {
     it("key `Escape` clear the input when list is close", async () => {
       render(<AutoComplete list={list} />);
 
-      const input = screen.getByRole("combobox") as HTMLInputElement;
+      const input = screen.getByRole("combobox");
 
       expect(screen.queryByRole("button")).not.toBeInTheDocument();
 
       fireEvent.input(input, { target: { value: "test search" } });
 
-      expect(input.value).toBe("test search");
+      expect(input).toHaveValue("test search");
       await waitFor(() =>
         expect(screen.getByRole("button")).toBeInTheDocument()
       );
 
       fireEvent.click(screen.getByRole("button"));
-      expect(input.value).toBe("");
+      expect(input).toHaveValue("");
     });
 
     it("key `Escape` close the list when is open", async () => {
@@ -149,18 +182,53 @@ describe("<AutoComplete/>", () => {
       expect(screen.queryByText(/quackity/i)).not.toBeInTheDocument();
     });
   });
-  describe("when click on a option", () => {
-    it("calls the selected function", async () => {
+
+  describe("when search", () => {
+    it("shows the correctly search if found something", async () => {
+      render(<AutoComplete list={list} />);
+
+      const input = screen.getByRole("combobox");
+
+      userEvent.type(input, "quackity");
+
+      expect(await screen.findByText(/quackity/i)).toBeInTheDocument();
+    });
+
+    it("shows the default not found message if not found something", async () => {
       render(<AutoComplete list={list} />);
 
       const input = screen.getByRole("combobox");
 
       fireEvent.click(input);
-      expect(await screen.findByText(/quackity/i)).toBeInTheDocument();
+      fireEvent.input(input, { target: { value: "text" } });
 
-      fireEvent.click(screen.getByText(/quackity/i));
+      expect(
+        await screen.findByText(/no search for text/i)
+      ).toBeInTheDocument();
+    });
 
-      await waitFor(() => expect(list[0].onSelect).toBeCalledTimes(1));
+    it("shows custom not found message if pass one and not found something", async () => {
+      render(<AutoComplete emptyMessage="notfound" list={list} />);
+
+      const input = screen.getByRole("combobox");
+
+      fireEvent.click(input);
+      fireEvent.input(input, { target: { value: "text" } });
+
+      expect(await screen.findByText(/notfound/i)).toBeInTheDocument();
+    });
+
+    it("clear the search input when click on clear search btn", async () => {
+      render(<AutoComplete list={[]} />);
+
+      const input = screen.getByRole("combobox");
+
+      fireEvent.input(input, { target: { value: "quackity" } });
+
+      await waitFor(() => expect(input).toHaveValue("quackity"));
+
+      userEvent.click(screen.getByLabelText(/clear search/i));
+      await waitFor(() => expect(input).toHaveValue(""));
     });
   });
 });

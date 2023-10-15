@@ -124,7 +124,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
               aria-expanded={isOpen}
               data-testid="btn-clear"
               aria-controls="cb1-listbox"
-              aria-label="indicator of autocomplete"
+              aria-label="clear search"
             >
               <Close size={32} variant />
             </Button>
