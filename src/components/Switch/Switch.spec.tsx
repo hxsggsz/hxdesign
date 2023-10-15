@@ -12,7 +12,7 @@ describe("Switch", () => {
     it("renders the switch off when checked={false}", () => {
       render(<Switch checked={false} setChecked={() => {}} />);
 
-      const switchComponent = screen.getByRole("checkbox");
+      const switchComponent = screen.getByRole("switch");
 
       expect(switchComponent).not.toBeChecked();
       expect(switchComponent).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("Switch", () => {
     it("renders the switch on when checked={true}", () => {
       render(<Switch checked={true} setChecked={() => {}} />);
 
-      const switchComponent = screen.getByRole("checkbox");
+      const switchComponent = screen.getByRole("switch");
 
       expect(switchComponent).toBeChecked();
       expect(switchComponent).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe("Switch", () => {
       const setCheckedMock = jest.fn();
       render(<Switch checked={true} setChecked={setCheckedMock} />);
 
-      const switchComponent = screen.getByRole("checkbox");
+      const switchComponent = screen.getByRole("switch");
       const ariaChecked = switchComponent.getAttribute("aria-checked");
 
       userEvent.click(switchComponent);
