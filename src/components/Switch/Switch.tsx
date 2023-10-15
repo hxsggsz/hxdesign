@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 export const Switch = (props: SwitchProps) => {
   const clickSound = new Audio(minecraftClickSound);
-  
+
   function handleSwitch() {
     clickSound.play();
     props.setChecked((prev) => !prev);
@@ -23,7 +23,10 @@ export const Switch = (props: SwitchProps) => {
       onChange={handleSwitch}
       className={switchClasses}
       aria-checked={props.checked}
-      aria-label={`${props.checkbox ? "checkbox" : "switch"} ${props.checked ? "on" : "off"}`}
+      role={`${props.checkbox ? "checkbox" : "switch"}`}
+      aria-label={`${props.checkbox ? "checkbox" : "switch"} ${
+        props.checked ? "on" : "off"
+      }`}
     />
   );
 };

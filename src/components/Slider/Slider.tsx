@@ -60,6 +60,14 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
         setValue((prev) => (prev += 1));
         break;
 
+      case "Home":
+        setValue(min);
+        break;
+
+      case "End":
+        setValue(max);
+        break;
+
       default:
         break;
     }
