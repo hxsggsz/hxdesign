@@ -1,7 +1,7 @@
 import "./styles/base.scss";
 
 function App() {
-  return <>minecraft design system</>;
+  return <>Minecraft design system</>;
 }
 
 export default App;
