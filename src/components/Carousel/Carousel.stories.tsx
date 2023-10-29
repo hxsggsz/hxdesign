@@ -18,5 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     images: [image, image2, image3, image4, image5],
+    autoPlay: false,
+    timer: 1000,
   },
 };
