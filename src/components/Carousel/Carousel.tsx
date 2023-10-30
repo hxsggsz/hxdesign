@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CarouselProps } from "./Carousel.types";
+import scss from "./Carousel.module.scss";
 
 export const Carousel = ({ timer = 5000, ...props }: CarouselProps) => {
   const [selectedItem, setSelectedItem] = useState(0);
@@ -14,15 +15,16 @@ export const Carousel = ({ timer = 5000, ...props }: CarouselProps) => {
       : setSelectedItem((prev) => --prev);
   }
 
-  function increment() {
+  const increment = useCallback(() => {
     const isLast = props.images.length - 1 === selectedItem;
     isLast ? setSelectedItem(0) : setSelectedItem((prev) => ++prev);
-  }
+  }, [props.images.length, selectedItem]);
 
   const findSelectedImage = useMemo(
     () =>
       props.images.find((image, index) => {
         const isSame = selectedItem === index;
+
         if (isSame) {
           return image;
         }
@@ -37,17 +39,39 @@ export const Carousel = ({ timer = 5000, ...props }: CarouselProps) => {
   }, [selectedItem, tuple]);
 
   useEffect(() => {
+    if (!props.autoPlay) return;
     const carouselTimer = setInterval(() => increment(), timer);
 
-    if (!props.autoPlay) {
-      return () => clearInterval(carouselTimer);
-    }
-  });
+    return () => clearInterval(carouselTimer);
+  }, [increment, props.autoPlay, timer]);
+
+  const renderDots = () =>
+    props.images.map((_, index) => {
+      const selected = index === selectedItem;
+
+      const handleSelectDot = () => setSelectedItem(index);
+      return (
+        <div style={{ display: "flex" }}>
+          <button
+            onClick={handleSelectDot}
+            style={{ color: `${selected ? "red" : ""}` }}
+          >
+            {index}
+          </button>
+        </div>
+      );
+    });
 
   return (
     <>
-      <img src={findSelectedImage} alt="aaa" />
-      <h1>imagem: {selectedItem}</h1>
+      <div className={scss.imageWrapper}>
+        <img
+          className={scss.image}
+          src={findSelectedImage}
+          alt={`carousel ${selectedItem}`}
+        />
+      </div>
+      <div style={{ display: "flex" }}>{renderDots()}</div>
       <button onClick={decrement}>prev</button>
       <button onClick={increment}>next</button>
     </>
