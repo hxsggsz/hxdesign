@@ -1,8 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CarouselProps } from "./Carousel.types";
 import scss from "./Carousel.module.scss";
+import { Arrow } from "../Icons/Arrow/Arrow";
+import { Button } from "../Button/Button";
+import { motion } from "framer-motion";
 
-export const Carousel = ({ timer = 5000, ...props }: CarouselProps) => {
+export const Carousel = ({
+  timer = 5000,
+  showDots = true,
+  showPrevNext = true,
+  ...props
+}: CarouselProps) => {
   const [selectedItem, setSelectedItem] = useState(0);
   const [tuple, setTuple] = useState([null, selectedItem]);
 
@@ -51,19 +59,29 @@ export const Carousel = ({ timer = 5000, ...props }: CarouselProps) => {
 
       const handleSelectDot = () => setSelectedItem(index);
       return (
-        <div style={{ display: "flex" }}>
-          <button
-            onClick={handleSelectDot}
-            style={{ color: `${selected ? "red" : ""}` }}
-          >
-            {index}
-          </button>
-        </div>
+        <motion.button
+          layout
+          className={scss.btnDots}
+          onClick={handleSelectDot}
+          aria-label={`button to select image ${selectedItem + 1}`}
+          style={{ background: `${selected ? "#333333" : ""}` }}
+        />
       );
     });
 
+  const renderPrevNext = () => (
+    <div className={scss.buttonsWrapper}>
+      <Button aria-label="button to preview the image" onClick={decrement}>
+        <Arrow variant outline orientation="left" />
+      </Button>
+      <Button aria-label="button to go to next image" onClick={increment}>
+        <Arrow variant outline />
+      </Button>
+    </div>
+  );
+
   return (
-    <>
+    <div className={scss.wrapper}>
       <div className={scss.imageWrapper}>
         <img
           className={scss.image}
@@ -71,9 +89,9 @@ export const Carousel = ({ timer = 5000, ...props }: CarouselProps) => {
           alt={`carousel ${selectedItem}`}
         />
       </div>
-      <div style={{ display: "flex" }}>{renderDots()}</div>
-      <button onClick={decrement}>prev</button>
-      <button onClick={increment}>next</button>
-    </>
+      {showDots && <div className={scss.dotsWrapper}>{renderDots()}</div>}
+
+      {showPrevNext && renderPrevNext()}
+    </div>
   );
 };

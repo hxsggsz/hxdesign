@@ -1,5 +1,7 @@
 export interface CarouselProps {
   images: string[];
   autoPlay?: boolean;
-  timer?: number; 
+  timer?: number;
+  showDots?: boolean;
+  showPrevNext?: boolean;
 }

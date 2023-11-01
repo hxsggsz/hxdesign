@@ -5,20 +5,24 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  width: 100%;
   justify-content: center;
   white-space: nowrap;
   font-size: 2.4rem;
-  padding: 0.4rem 1rem;
+  padding: 0.2rem 0.4rem;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .defaultBtn, .grass {
-  border: 2px solid variables.$greyDefault;
+  border: 2px solid variables.$bgChecked;
   position: relative;
+  color: variables.$white;
 }
 
 .defaultBtn {
-  background: variables.$greyDefault;
+  background: variables.$bgChecked;
   
   &::before, &:hover::before {
     content: '';
@@ -30,7 +34,7 @@
   }
   
   &::before {
-    background: variables.$greyGradient;
+    background: variables.$lineCenterChecked;
   }
 
   &:hover {
@@ -55,7 +59,7 @@
 
 .grass {
   background-color: variables.$greyDefault;
-  background-image: url('../../assets/grass.jpg');
+  background-image: url('../assets/grass.jpg');
   background-size: contain;
   background-position: center center;
 
