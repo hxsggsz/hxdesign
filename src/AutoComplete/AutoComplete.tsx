@@ -5,7 +5,7 @@ import { Arrow } from "../Icons/Arrow/Arrow";
 import { Close } from "../Icons/Close/Close";
 import { Button } from "../Button/Button";
 import { AutoCompleteProps, ListProps } from "./AutoComplete.types";
-import useClickOutside from "../hooks/useClickOutside";
+import useClickOutside from "../utils/hooks/useClickOutside";
 import { useRovingTabIndex } from "@20i/use-roving-tabindex-a11y";
 
 export const AutoComplete = (props: AutoCompleteProps) => {

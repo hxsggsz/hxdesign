@@ -1,6 +1,6 @@
 import scss from "./Switch.module.scss";
 import { SwitchProps } from "./Switch.types";
-import minecraftClickSound from "../../assets/minecraft_click.mp3";
+import minecraftClickSound from "../assets/minecraft_click.mp3";
 import classNames from "classnames";
 
 export const Switch = (props: SwitchProps) => {
