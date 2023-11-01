@@ -11,13 +11,14 @@
   border: 12px solid variables.$check;
   border-top: 18px solid variables.$check;
   border-radius: 3px;
+  overflow: hidden;
   
   &::before {
     content: '';
     width: 0.4rem;
     filter: blur(5px);
 
-    height: 100%;
+    height: 90%;
     background: variables.$white;
     position: absolute;
   }

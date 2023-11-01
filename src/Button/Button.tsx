@@ -1,12 +1,10 @@
 import { ButtonProps } from "./Button.types";
 import scss from "./Button.module.scss";
 import { useState } from "react";
-import minecraftClickSound from "../assets/minecraft_click.mp3";
 import classNames from "classnames";
+import { minecraftClickSound } from "../utils/minecraftClickSound";
 
 export const Button = (props: ButtonProps) => {
-  const clickSound = new Audio(minecraftClickSound);
-
   const [isClicked, setIsClicked] = useState(false);
 
   const btnClasses = classNames({
@@ -16,7 +14,7 @@ export const Button = (props: ButtonProps) => {
   });
 
   function handleClickCapture() {
-    clickSound.play();
+    minecraftClickSound.play();
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 1000);
   }
@@ -28,6 +26,7 @@ export const Button = (props: ButtonProps) => {
       aria-pressed={isClicked}
       aria-disabled={props.disabled}
       onClickCapture={handleClickCapture}
+      data-noFullscreen={props.noFullScreen}
     >
       {props.children}
     </button>
