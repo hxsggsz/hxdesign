@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Arrow } from "../Arrow/Arrow";
+import { Arrow } from "./Arrow";
 
 const meta = {
   title: "Project Icons/icons/Arrow",

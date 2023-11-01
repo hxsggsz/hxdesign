@@ -13,12 +13,12 @@
 }
 
 .defaultBtn, .grass {
-  border: 2px solid variables.$black;
+  border: 2px solid variables.$greyDefault;
   position: relative;
 }
 
 .defaultBtn {
-  background: variables.$btnDefault;
+  background: variables.$greyDefault;
   
   &::before, &:hover::before {
     content: '';
@@ -30,20 +30,20 @@
   }
   
   &::before {
-    background: variables.$btnGradient;
+    background: variables.$greyGradient;
   }
 
   &:hover {
-    background: variables.$btnHover;
+    background: variables.$blueHover;
     color: variables.$fontHover;
   }
 
   &:hover::before {
-    background: variables.$btnGradientHover;
+    background: variables.$blueGradientHover;
   }
 
   &:disabled {
-    background: variables.$btnDisable;
+    background: variables.$darkGrey;
     cursor: not-allowed;
     color: variables.$fontDisable;
   }
@@ -54,7 +54,7 @@
 }
 
 .grass {
-  background-color: variables.$btnDefault;
+  background-color: variables.$greyDefault;
   background-image: url('../../assets/grass.jpg');
   background-size: contain;
   background-position: center center;
