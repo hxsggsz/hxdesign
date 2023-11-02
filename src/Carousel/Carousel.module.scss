@@ -11,6 +11,7 @@
   border: 12px solid variables.$check;
   border-top: 18px solid variables.$check;
   border-radius: 3px;
+  background: variables.$darkGrey;
   overflow: hidden;
   
   &::before {

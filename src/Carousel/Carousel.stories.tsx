@@ -25,3 +25,25 @@ export const Primary: Story = {
     timer: 1000,
   },
 };
+
+export const AutoPlay: Story = {
+  args: {
+    images: [image, image2, image3, image4, image5],
+    autoPlay: true,
+    stopOnHover: true,
+    showDots: true,
+    showPrevNext: true,
+    timer: 1000,
+  },
+};
+
+export const HiddenInfos: Story = {
+  args: {
+    images: [image, image2, image3, image4, image5],
+    autoPlay: true,
+    stopOnHover: true,
+    showDots: false,
+    showPrevNext: false,
+    timer: 1000,
+  },
+};

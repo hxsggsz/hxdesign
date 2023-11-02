@@ -1,9 +1,10 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { minecraftClickSound } from "../../utils/minecraftClickSound";
 
 export const useCarousel = (images: string[]) => {
   const [selectedItem, setSelectedItem] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [direction, setDirection] = useState<"left" | "right" | null>(null);
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,6 +25,7 @@ export const useCarousel = (images: string[]) => {
   };
 
   function decrement() {
+    setDirection("left");
     const isFirst = selectedItem === 0;
     isFirst
       ? setSelectedItem(images.length - 1)
@@ -31,29 +33,19 @@ export const useCarousel = (images: string[]) => {
   }
 
   const increment = useCallback(() => {
+    setDirection("right");
     const isLast = images.length - 1 === selectedItem;
     isLast ? setSelectedItem(0) : setSelectedItem((prev) => ++prev);
   }, [images.length, selectedItem]);
 
-  const findSelectedImage = useMemo(
-    () =>
-      images.find((image, index) => {
-        const isSame = selectedItem === index;
-        if (isSame) {
-          return image;
-        }
-      }),
-    [images, selectedItem]
-  );
-
   return {
     increment,
     decrement,
+    direction,
     isHovering,
     updateHover,
     carouselRef,
     selectedItem,
-    findSelectedImage,
     updateSelectedImage,
   };
 };

@@ -4,6 +4,7 @@ import scss from "./Carousel.module.scss";
 import { Arrow } from "../Icons/Arrow/Arrow";
 import { Button } from "../Button/Button";
 import { useCarousel } from "./hooks/useCarousel";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const Carousel = ({
   timer = 5000,
@@ -58,11 +59,18 @@ export const Carousel = ({
   return (
     <div ref={carousel.carouselRef} className={scss.wrapper}>
       <div className={scss.imageWrapper}>
-        <img
-          className={scss.image}
-          src={carousel.findSelectedImage}
-          alt={`carousel ${carousel.selectedItem}`}
-        />
+        <AnimatePresence key={carousel.selectedItem}>
+          <motion.img
+            key={carousel.selectedItem}
+            initial={{ x: carousel.direction === "left" ? 100 : -100 }}
+            animate={{ x: 0 }}
+            exit={{ x: carousel.direction === "right" ? 100 : -100 }}
+            transition={{ type: "keyframes" }}
+            className={scss.image}
+            src={props.images[carousel.selectedItem]}
+            alt={`carousel ${carousel.selectedItem}`}
+          />
+        </AnimatePresence>
       </div>
       {showDots && <div className={scss.dotsWrapper}>{renderDots()}</div>}
 
