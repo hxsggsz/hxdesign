@@ -19,6 +19,9 @@ export const Primary: Story = {
   args: {
     images: [image, image2, image3, image4, image5],
     autoPlay: false,
+    stopOnHover: true,
+    showDots: true,
+    showPrevNext: true,
     timer: 1000,
   },
 };

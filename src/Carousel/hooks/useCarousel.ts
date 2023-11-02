@@ -1,12 +1,26 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { minecraftClickSound } from "../../utils/minecraftClickSound";
 
 export const useCarousel = (images: string[]) => {
   const [selectedItem, setSelectedItem] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const carouselRef = useRef<HTMLDivElement | null>(null);
 
   const updateSelectedImage = (index: number) => {
     setSelectedItem(index);
     minecraftClickSound.play();
+  };
+
+  const updateHover = () => {
+    if (!carouselRef.current) return;
+
+    carouselRef.current.addEventListener("mouseover", () =>
+      setIsHovering(true)
+    );
+    carouselRef.current.addEventListener("mouseleave", () =>
+      setIsHovering(false)
+    );
   };
 
   function decrement() {
@@ -25,7 +39,6 @@ export const useCarousel = (images: string[]) => {
     () =>
       images.find((image, index) => {
         const isSame = selectedItem === index;
-
         if (isSame) {
           return image;
         }
@@ -36,8 +49,11 @@ export const useCarousel = (images: string[]) => {
   return {
     increment,
     decrement,
-    findSelectedImage,
+    isHovering,
+    updateHover,
+    carouselRef,
     selectedItem,
+    findSelectedImage,
     updateSelectedImage,
   };
 };

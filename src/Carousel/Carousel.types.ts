@@ -4,4 +4,5 @@ export interface CarouselProps {
   timer?: number;
   showDots?: boolean;
   showPrevNext?: boolean;
+  stopOnHover?: boolean;
 }

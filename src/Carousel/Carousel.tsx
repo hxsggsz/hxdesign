@@ -12,11 +12,15 @@ export const Carousel = ({
   ...props
 }: CarouselProps) => {
   const carousel = useCarousel(props.images);
+
   useEffect(() => {
     if (!props.autoPlay) return;
-    const carouselTimer = setInterval(() => carousel.increment(), timer);
-    return () => clearInterval(carouselTimer);
-  }, [carousel, carousel.increment, props.autoPlay, timer]);
+    carousel.updateHover();
+    if (!carousel.isHovering && props.stopOnHover) {
+      const carouselTimer = setInterval(() => carousel.increment(), timer);
+      return () => clearInterval(carouselTimer);
+    }
+  }, [carousel, props.autoPlay, props.stopOnHover, timer]);
 
   const renderDots = () =>
     props.images.map((_, index) => {
@@ -52,7 +56,7 @@ export const Carousel = ({
   );
 
   return (
-    <div className={scss.wrapper}>
+    <div ref={carousel.carouselRef} className={scss.wrapper}>
       <div className={scss.imageWrapper}>
         <img
           className={scss.image}
