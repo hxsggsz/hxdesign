@@ -13,7 +13,9 @@
   border-radius: 3px;
   background: variables.$darkGrey;
   overflow: hidden;
-  
+  pointer-events: none;
+  user-select: none;
+
   &::before {
     content: '';
     width: 0.4rem;

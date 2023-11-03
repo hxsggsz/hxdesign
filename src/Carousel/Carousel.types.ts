@@ -5,4 +5,5 @@ export interface CarouselProps {
   showDots?: boolean;
   showPrevNext?: boolean;
   stopOnHover?: boolean;
+  isSwippable?: boolean;
 }

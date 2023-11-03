@@ -5,6 +5,7 @@ import { Arrow } from "../Icons/Arrow/Arrow";
 import { Button } from "../Button/Button";
 import { useCarousel } from "./hooks/useCarousel";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
 
 export const Carousel = ({
   timer = 5000,
@@ -13,6 +14,13 @@ export const Carousel = ({
   ...props
 }: CarouselProps) => {
   const carousel = useCarousel(props.images);
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => props.isSwippable && carousel.increment(),
+    onSwipedRight: () => props.isSwippable && carousel.decrement(),
+    trackMouse: true,
+    preventScrollOnSwipe: true,
+  });
 
   function handleKeyDown(ev: React.KeyboardEvent<HTMLDivElement>) {
     switch (ev.key) {
@@ -80,6 +88,7 @@ export const Carousel = ({
 
   return (
     <div
+      {...handlers}
       id="carousel-items"
       className={scss.wrapper}
       onKeyDown={handleKeyDown}
@@ -95,9 +104,9 @@ export const Carousel = ({
       >
         <AnimatePresence key={carousel.selectedItem}>
           <motion.img
-            initial={{ x: carousel.direction === "left" ? 100 : -100 }}
+            initial={{ x: carousel.direction === "left" ? -100 : 100 }}
             animate={{ x: 0 }}
-            exit={{ x: carousel.direction === "right" ? 100 : -100 }}
+            exit={{ x: carousel.direction === "right" ? -100 : 100 }}
             transition={{ type: "keyframes" }}
             className={scss.image}
             src={props.images[carousel.selectedItem]}

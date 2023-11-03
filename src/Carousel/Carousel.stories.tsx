@@ -47,3 +47,15 @@ export const HiddenInfos: Story = {
     timer: 1000,
   },
 };
+
+export const Swippable: Story = {
+  args: {
+    images: [image, image2, image3, image4, image5],
+    autoPlay: true,
+    isSwippable: true,
+    stopOnHover: true,
+    showDots: true,
+    showPrevNext: true,
+    timer: 1000,
+  },
+};

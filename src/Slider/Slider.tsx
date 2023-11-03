@@ -25,6 +25,10 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
     props.sliderValue ?? props.defaultValue ?? 0
   );
 
+  function clamp(number: number, min: number, max: number) {
+    return Math.max(min, Math.min(number, max));
+  }
+
   function handleDrag() {
     if (!buttonRef.current || !progressBarRef.current) return;
 
@@ -33,7 +37,7 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
     const progressBarBounds = progressBarRef.current.getBoundingClientRect();
     const newProgress =
       (middleButton - progressBarBounds.x) / progressBarBounds.width;
-    setValue(Math.round(newProgress * (max - min)));
+    setValue(newProgress * (max - min));
   }
 
   function handlePointerDown(ev: React.PointerEvent<HTMLDivElement>) {
@@ -41,8 +45,8 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
 
     const { left, width } = progressBarRef.current.getBoundingClientRect();
     const position = ev.pageX - left;
-    const newProgress = Math.max(0, Math.min(position / width, 1));
-    const newValue = Math.round(newProgress * (max - min));
+    const newProgress = clamp(position / width, 0, 1);
+    const newValue = newProgress * (max - min);
 
     setValue(newValue);
     animate(buttonX, newProgress * width);
@@ -83,8 +87,7 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
 
   useEffect(() => {
     if (props.setSliderValue) props.setSliderValue(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [props, value]);
 
   return (
     <div
@@ -102,8 +105,8 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
         className={scss.trackProgress}
         ref={progressBarRef}
         style={{
-          left: buttonSize,
-          right: buttonSize,
+          left: buttonSize / 2,
+          right: buttonSize / 2,
         }}
       />
 
@@ -113,7 +116,11 @@ export const Slider = ({ min = 0, max = 100, ...props }: SliderProps) => {
         dragElastic={false}
         onDrag={handleDrag}
         dragMomentum={false}
-        style={{ x: buttonX }}
+        style={{
+          width: buttonSize,
+          height: buttonSize,
+          x: buttonX,
+        }}
         className={scss.button}
         onKeyDown={handleKeyDown}
         data-testid="trigger-button"
