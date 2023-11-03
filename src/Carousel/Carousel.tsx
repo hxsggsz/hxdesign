@@ -14,6 +14,26 @@ export const Carousel = ({
 }: CarouselProps) => {
   const carousel = useCarousel(props.images);
 
+  function handleKeyDown(ev: React.KeyboardEvent<HTMLDivElement>) {
+    switch (ev.key) {
+      case "ArrowLeft":
+        carousel.decrement();
+        break;
+      case "ArrowRight":
+        carousel.increment();
+        break;
+      case "Home":
+        carousel.updateSelectedImage(0);
+        break;
+
+      case "End":
+        carousel.updateSelectedImage(props.images.length - 1);
+        break;
+
+      default:
+        break;
+    }
+  }
   useEffect(() => {
     if (!props.autoPlay) return;
     carousel.updateHover();
@@ -41,15 +61,17 @@ export const Carousel = ({
     <div className={scss.buttonsWrapper}>
       <Button
         noFullScreen
-        aria-label="button to preview the image"
         onClick={carousel.decrement}
+        aria-controls="carousel-items"
+        aria-label="button to preview the image"
       >
         <Arrow variant outline orientation="left" />
       </Button>
       <Button
         noFullScreen
-        aria-label="button to go to next image"
         onClick={carousel.increment}
+        aria-controls="carousel-items"
+        aria-label="button to go to next image"
       >
         <Arrow variant outline />
       </Button>
@@ -57,11 +79,22 @@ export const Carousel = ({
   );
 
   return (
-    <div ref={carousel.carouselRef} className={scss.wrapper}>
-      <div className={scss.imageWrapper}>
+    <div
+      id="carousel-items"
+      className={scss.wrapper}
+      onKeyDown={handleKeyDown}
+      ref={carousel.carouselRef}
+      aria-label="custom carousel"
+      aria-roledescription="carousel"
+    >
+      <div
+        role="group"
+        aria-roledescription="slide"
+        className={scss.imageWrapper}
+        aria-label={`${carousel.selectedItem} of ${props.images.length - 1}`}
+      >
         <AnimatePresence key={carousel.selectedItem}>
           <motion.img
-            key={carousel.selectedItem}
             initial={{ x: carousel.direction === "left" ? 100 : -100 }}
             animate={{ x: 0 }}
             exit={{ x: carousel.direction === "right" ? 100 : -100 }}

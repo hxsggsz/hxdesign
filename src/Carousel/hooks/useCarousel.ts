@@ -8,12 +8,12 @@ export const useCarousel = (images: string[]) => {
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
-  const updateSelectedImage = (index: number) => {
+  function updateSelectedImage(index: number) {
     setSelectedItem(index);
     minecraftClickSound.play();
-  };
+  }
 
-  const updateHover = () => {
+  function updateHover() {
     if (!carouselRef.current) return;
 
     carouselRef.current.addEventListener("mouseover", () =>
@@ -22,7 +22,7 @@ export const useCarousel = (images: string[]) => {
     carouselRef.current.addEventListener("mouseleave", () =>
       setIsHovering(false)
     );
-  };
+  }
 
   function decrement() {
     setDirection("left");

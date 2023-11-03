@@ -17,6 +17,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
 
   function handleChange(ev: React.ChangeEvent<HTMLInputElement>) {
     setSearch(ev.currentTarget.value);
+    handleOpen(true);
   }
 
   function handleOpen(open?: boolean) {
