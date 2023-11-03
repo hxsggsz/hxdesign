@@ -5,9 +5,12 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { AutoComplete } from "./AutoComplete";
+import { AutoComplete } from ".";
 import { axe } from "jest-axe";
 import userEvent from "@testing-library/user-event";
+
+// fix console error on tests
+jest.mock("@20i/use-roving-tabindex-a11y");
 
 const list = [
   {

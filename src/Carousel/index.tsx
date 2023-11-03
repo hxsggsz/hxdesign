@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { CarouselProps } from "./Carousel.types";
 import scss from "./Carousel.module.scss";
 import { Arrow } from "../Icons/Arrow/Arrow";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { useCarousel } from "./hooks/useCarousel";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
@@ -110,7 +110,7 @@ export const Carousel = ({
             transition={{ type: "keyframes" }}
             className={scss.image}
             src={props.images[carousel.selectedItem]}
-            alt={`carousel ${carousel.selectedItem}`}
+            alt={`carousel ${props.images[carousel.selectedItem]}`}
           />
         </AnimatePresence>
       </div>

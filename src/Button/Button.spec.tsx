@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { Button } from "./Button";
+import { Button } from ".";
 import { axe } from "jest-axe";
 import { userEvent } from "@testing-library/user-event";
 

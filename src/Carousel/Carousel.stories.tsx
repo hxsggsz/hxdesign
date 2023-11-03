@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Carousel } from "./Carousel";
+import { Carousel } from ".";
 import image from "./assets/image.jfif";
 import image2 from "./assets/image2.jfif";
 import image3 from "./assets/image3.jfif";

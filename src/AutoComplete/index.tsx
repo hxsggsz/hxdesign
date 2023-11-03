@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import { Input } from "../Input/Input";
+import { Input } from "../Input";
 import scss from "./AutoComplete.module.scss";
 import { Arrow } from "../Icons/Arrow/Arrow";
 import { Close } from "../Icons/Close/Close";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { AutoCompleteProps, ListProps } from "./AutoComplete.types";
 import useClickOutside from "../utils/hooks/useClickOutside";
 import { useRovingTabIndex } from "@20i/use-roving-tabindex-a11y";

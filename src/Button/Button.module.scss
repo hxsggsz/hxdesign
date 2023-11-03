@@ -11,7 +11,7 @@
   font-size: 2.4rem;
   padding: 0.2rem 0.4rem;
   
-  &[data-noFullscreen=true] {
+  &[data-nofullscreen=true] {
     @media (max-width: 768px) {
       width: auto; 
     } 

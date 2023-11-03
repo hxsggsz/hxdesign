@@ -26,7 +26,7 @@ export const Button = (props: ButtonProps) => {
       aria-pressed={isClicked}
       aria-disabled={props.disabled}
       onClickCapture={handleClickCapture}
-      data-noFullscreen={props.noFullScreen}
+      data-nofullscreen={props.noFullScreen}
     >
       {props.children}
     </button>

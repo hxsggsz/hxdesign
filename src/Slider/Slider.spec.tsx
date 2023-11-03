@@ -4,7 +4,7 @@ import {
   render,
   waitFor,
 } from "@testing-library/react";
-import { Slider } from "./Slider";
+import { Slider } from ".";
 import { axe } from "jest-axe";
 import userEvent from "@testing-library/user-event";
 
