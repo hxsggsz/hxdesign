@@ -6,6 +6,7 @@ import { Button } from "../Button";
 import { useCarousel } from "./hooks/useCarousel";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
+import { nanoid } from "nanoid";
 
 export const Carousel = ({
   timer = 5000,
@@ -57,6 +58,8 @@ export const Carousel = ({
 
       return (
         <button
+          key={nanoid()}
+          data-testid={`btn ${index + 1}`}
           className={scss.btnDots}
           onClick={() => carousel.updateSelectedImage(index)}
           aria-label={`button to select image ${carousel.selectedItem + 1}`}
@@ -69,14 +72,16 @@ export const Carousel = ({
     <div className={scss.buttonsWrapper}>
       <Button
         noFullScreen
+        data-testid="prev btn"
         onClick={carousel.decrement}
         aria-controls="carousel-items"
-        aria-label="button to preview the image"
+        aria-label="button to prev the image"
       >
         <Arrow variant outline orientation="left" />
       </Button>
       <Button
         noFullScreen
+        data-testid="next btn"
         onClick={carousel.increment}
         aria-controls="carousel-items"
         aria-label="button to go to next image"
@@ -100,7 +105,7 @@ export const Carousel = ({
         role="group"
         aria-roledescription="slide"
         className={scss.imageWrapper}
-        aria-label={`${carousel.selectedItem} of ${props.images.length - 1}`}
+        aria-label={`${carousel.selectedItem} of ${props.images.length}`}
       >
         <AnimatePresence key={carousel.selectedItem}>
           <motion.img

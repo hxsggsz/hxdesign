@@ -1,12 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { useCarousel } from "./useCarousel";
-
-const minecraftSoundEffectClick = jest
-  .spyOn(window.HTMLMediaElement.prototype, "play")
-  .mockImplementation(undefined);
-
-const mockImages = ["image1", "image2", "image3", "image4", "image5"];
-const lastItemOnCarousel = mockImages.length - 1;
+import { lastItemOnCarousel, minecraftSoundEffectClick, mockImages } from "../Carousel.mocks";
 
 describe("useCarousel", () => {
   describe("when initialize", () => {
