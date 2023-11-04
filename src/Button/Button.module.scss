@@ -1,7 +1,7 @@
 @use "../styles/variables";
 @use "../styles/base.scss";
 
-.defaultBtn, .grass, .none {
+.defaultBtn, .grass, .none, .outline {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -10,7 +10,8 @@
   white-space: nowrap;
   font-size: 2.4rem;
   padding: 0.2rem 0.4rem;
-  
+  border-radius: 2px;
+
   &[data-nofullscreen=true] {
     @media (max-width: 768px) {
       width: auto; 
@@ -28,9 +29,17 @@
   color: variables.$white;
 }
 
+.outline {
+  border: 3px solid variables.$bgChecked;
+  background: transparent;
+  color: variables.$bgChecked;
+}
+
 .defaultBtn {
   background: variables.$bgChecked;
-  
+}
+
+.defaultBtn, .outline {
   &::before, &:hover::before {
     content: '';
     position: absolute;
@@ -41,7 +50,7 @@
   }
   
   &::before {
-    background: variables.$lineCenterChecked;
+    background: variables.$fontDisable;
   }
 
   &:hover {

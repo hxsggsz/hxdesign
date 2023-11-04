@@ -38,6 +38,12 @@ export const Grass: Story = {
   },
 };
 
+export const Outline: Story = {
+  args: {
+    children: "minecraft",
+    variant: "outline",
+  },
+};
 export const None: Story = {
   args: {
     children: "minecraft",
