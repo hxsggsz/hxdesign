@@ -8,6 +8,7 @@ export const DragAndDrop = (props: DragAndDropProps) => {
   const [error, setError] = useState("");
 
   const inputRef = useRef<HTMLInputElement | null>(null);
+
   function validateFiles(files: FileList) {
     return Array.from(files).filter((file) => {
       const fileSizeInMegaBytes = Math.floor(file.size / 1024 / 1024);
@@ -28,6 +29,16 @@ export const DragAndDrop = (props: DragAndDropProps) => {
 
       return supportedFiles;
     });
+  }
+
+  function deleteFile(
+    ev: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    index: number
+  ) {
+    ev.stopPropagation();
+    const filterFile = files?.filter((_file, fileIndex) => fileIndex !== index);
+    setFiles(filterFile);
+    props.onChange(filterFile);
   }
 
   function simulateInputClick() {
@@ -79,33 +90,57 @@ export const DragAndDrop = (props: DragAndDropProps) => {
 
   const renderImagePreview = () => {
     const imageFiles = files?.filter((file) => file.type.includes("image"));
-    return imageFiles?.map((file) => (
-      <img
-        key={nanoid()}
-        alt={`${file.name}`}
-        className={scss.imagePreview}
-        src={URL.createObjectURL(file)}
-      />
+    return imageFiles?.map((file, index) => (
+      <div className={scss.fileWrapper}>
+        <img
+          key={nanoid()}
+          alt={`${file.name}`}
+          className={scss.imagePreview}
+          src={URL.createObjectURL(file)}
+        />
+        <button
+          className={scss.deleteFile}
+          onClick={(ev) => deleteFile(ev, index)}
+        >
+          X
+        </button>
+      </div>
     ));
   };
 
   const renderVideoPreview = () => {
     const videoFiles = files?.filter((file) => file.type.includes("video"));
-    return videoFiles?.map((file) => (
-      <video key={nanoid()} controls className={scss.imagePreview}>
-        <source src={URL.createObjectURL(file)} type={file.type} />
-      </video>
+    return videoFiles?.map((file, index) => (
+      <div className={scss.fileWrapper}>
+        <video key={nanoid()} controls className={scss.imagePreview}>
+          <source src={URL.createObjectURL(file)} type={file.type} />
+        </video>
+        <button
+          className={scss.deleteFile}
+          onClick={(ev) => deleteFile(ev, index)}
+        >
+          X
+        </button>
+      </div>
     ));
   };
 
   const renderPdfPreview = () => {
     const pdfFiles = files?.filter((file) => file.type.includes("pdf"));
-    return pdfFiles?.map((file) => (
-      <iframe
-        key={nanoid()}
-        className={scss.imagePreview}
-        src={URL.createObjectURL(file)}
-      />
+    return pdfFiles?.map((file, index) => (
+      <div className={scss.fileWrapper}>
+        <iframe
+          key={nanoid()}
+          className={scss.imagePreview}
+          src={URL.createObjectURL(file)}
+        />
+        <button
+          className={scss.deleteFile}
+          onClick={(ev) => deleteFile(ev, index)}
+        >
+          X
+        </button>
+      </div>
     ));
   };
 

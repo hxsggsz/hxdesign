@@ -71,4 +71,21 @@
     max-height: 20rem;
     border: 4px solid variables.$minecraftBrown;
   }
+  
+  .fileWrapper {
+    position: relative;
+    
+    .deleteFile {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+      background: variables.$white;
+      color: variables.$minecraftBrown;
+      border: 2px solid variables.$minecraftBrown;
+      border-radius: 50%;
+      text-align: center;
+      padding: 0.2rem 0.4rem;
+    }
+  }
 }
