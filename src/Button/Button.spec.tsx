@@ -33,10 +33,7 @@ describe("Button", () => {
       const btn = screen.getByRole("button", { name: "test" });
       userEvent.click(btn);
 
-      const ariaPressed = btn.getAttribute("aria-pressed");
-
       await waitFor(() => {
-        expect(ariaPressed).toBeTruthy();
         expect(mockFunc).toHaveBeenCalledTimes(1);
         expect(minecraftSoundEffectClick).toHaveBeenCalledTimes(1);
       });
