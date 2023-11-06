@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import scss from "./DragAndDrop.module.scss";
 import { DragAndDropProps } from "./DragAndDrop.types";
 import { nanoid } from "nanoid";
@@ -7,20 +7,19 @@ export const DragAndDrop = (props: DragAndDropProps) => {
   const [files, setFiles] = useState<File[]>();
   const [error, setError] = useState("");
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
   function validateFiles(files: FileList) {
     return Array.from(files).filter((file) => {
       const fileSizeInMegaBytes = Math.floor(file.size / 1024 / 1024);
-      if (fileSizeInMegaBytes > props.maxSize) {
-        setError("this file is too big");
-        return;
-      }
 
       const supportedFiles = props.SupportedMedia.find(
         (type) =>
           file.type.includes(type) && fileSizeInMegaBytes < props.maxSize
       );
+
+      if (fileSizeInMegaBytes > props.maxSize) {
+        setError("this file is too big");
+        return;
+      }
 
       if (!supportedFiles) {
         setError("File not supported");
@@ -39,10 +38,6 @@ export const DragAndDrop = (props: DragAndDropProps) => {
     const filterFile = files?.filter((_file, fileIndex) => fileIndex !== index);
     setFiles(filterFile);
     props.onChange(filterFile);
-  }
-
-  function simulateInputClick() {
-    if (inputRef.current) inputRef.current.click();
   }
 
   function onChange(ev: React.ChangeEvent<HTMLInputElement>) {
@@ -81,7 +76,7 @@ export const DragAndDrop = (props: DragAndDropProps) => {
     props.SupportedMedia.map((media, index) => {
       const lastItem = index === props.SupportedMedia.length - 1;
       return (
-        <span className={scss.subInfo}>
+        <span key={nanoid()} className={scss.subInfo}>
           {media}
           {lastItem ? "" : ","}{" "}
         </span>
@@ -91,9 +86,8 @@ export const DragAndDrop = (props: DragAndDropProps) => {
   const renderImagePreview = () => {
     const imageFiles = files?.filter((file) => file.type.includes("image"));
     return imageFiles?.map((file, index) => (
-      <div className={scss.fileWrapper}>
+      <div key={nanoid()} className={scss.fileWrapper}>
         <img
-          key={nanoid()}
           alt={`${file.name}`}
           className={scss.imagePreview}
           src={URL.createObjectURL(file)}
@@ -111,8 +105,8 @@ export const DragAndDrop = (props: DragAndDropProps) => {
   const renderVideoPreview = () => {
     const videoFiles = files?.filter((file) => file.type.includes("video"));
     return videoFiles?.map((file, index) => (
-      <div className={scss.fileWrapper}>
-        <video key={nanoid()} controls className={scss.imagePreview}>
+      <div key={nanoid()} className={scss.fileWrapper}>
+        <video controls className={scss.imagePreview}>
           <source src={URL.createObjectURL(file)} type={file.type} />
         </video>
         <button
@@ -128,12 +122,8 @@ export const DragAndDrop = (props: DragAndDropProps) => {
   const renderPdfPreview = () => {
     const pdfFiles = files?.filter((file) => file.type.includes("pdf"));
     return pdfFiles?.map((file, index) => (
-      <div className={scss.fileWrapper}>
-        <iframe
-          key={nanoid()}
-          className={scss.imagePreview}
-          src={URL.createObjectURL(file)}
-        />
+      <div key={nanoid()} className={scss.fileWrapper}>
+        <iframe className={scss.imagePreview} src={URL.createObjectURL(file)} />
         <button
           className={scss.deleteFile}
           onClick={(ev) => deleteFile(ev, index)}
@@ -147,20 +137,22 @@ export const DragAndDrop = (props: DragAndDropProps) => {
   return (
     <div
       onDrop={handleDrop}
+      data-testid="dropzone"
       className={scss.wrapper}
       onDragOver={handleDragOver}
-      onClick={simulateInputClick}
     >
       <h1 className={scss.title}>Drag And Drop your files here!</h1>
       <p className={scss.subInfo}>supported files: {renderSupportedFiles()}</p>
 
       <span className={scss.subInfo}>or</span>
 
-      <label className={scss.label}>Select a file here</label>
+      <label htmlFor="file" className={scss.label}>
+        Select a file here
+      </label>
 
       <input
+        id="file"
         type="file"
-        ref={inputRef}
         onChange={onChange}
         className={scss.hidden}
       />
