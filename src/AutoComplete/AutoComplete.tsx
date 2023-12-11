@@ -109,6 +109,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
           role="combobox"
           spellCheck="false"
           aria-expanded={isOpen}
+          autoComplete="off"
           aria-autocomplete="list"
           onChange={handleChange}
           aria-controls="cb1-listbox"

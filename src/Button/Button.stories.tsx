@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from ".";
+import scss from "./Button.module.scss";
 
 const meta = {
   title: "Design System/components/Button",
@@ -44,6 +45,14 @@ export const Outline: Story = {
     variant: "outline",
   },
 };
+
+export const CustomCss: Story = {
+  args: {
+    children: "minecraft",
+    className: scss.teste,
+  },
+};
+
 export const None: Story = {
   args: {
     children: "minecraft",

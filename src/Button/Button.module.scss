@@ -1,7 +1,10 @@
-@use "../styles/variables";
+@use "../styles/variables" as *;
 @use "../styles/base.scss";
 
-.defaultBtn, .grass, .none, .outline {
+.defaultBtn,
+.grass,
+.none,
+.outline {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -9,13 +12,14 @@
   justify-content: center;
   white-space: nowrap;
   font-size: 2.4rem;
-  padding: 0.2rem 0.4rem;
+  padding: 0.5rem 1rem;
+  min-width: 9.6rem;
   border-radius: 2px;
 
-  &[data-nofullscreen=true] {
+  &[data-nofullscreen="true"] {
     @media (max-width: 768px) {
-      width: auto; 
-    } 
+      width: auto;
+    }
   }
 
   @media (max-width: 768px) {
@@ -23,49 +27,53 @@
   }
 }
 
-.defaultBtn, .grass {
-  border: 2px solid variables.$bgChecked;
+.defaultBtn,
+.grass {
+  border: 2px solid $bgChecked;
   position: relative;
-  color: variables.$white;
+  color: $white;
 }
 
 .outline {
-  border: 3px solid variables.$bgChecked;
+  border: 3px solid $bgChecked;
   background: transparent;
-  color: variables.$bgChecked;
+  color: $bgChecked;
 }
 
 .defaultBtn {
-  background: variables.$bgChecked;
+  background: $bgChecked;
 }
 
-.defaultBtn, .outline {
-  &::before, &:hover::before {
-    content: '';
+.defaultBtn,
+.outline {
+  &::before,
+  &:hover::before {
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 0.6rem;
   }
-  
+
   &::before {
-    background: variables.$fontDisable;
+    background: $fontDisable;
   }
 
   &:hover {
-    background: variables.$blueHover;
-    color: variables.$fontHover;
+    background: $blueHover;
+    border: 3px solid $blueHover;
+    color: $fontHover;
   }
 
   &:hover::before {
-    background: variables.$blueGradientHover;
+    background: $blueGradientHover;
   }
 
   &:disabled {
-    background: variables.$darkGrey;
+    background: $darkGrey;
     cursor: not-allowed;
-    color: variables.$fontDisable;
+    color: $fontDisable;
   }
 
   &:disabled::before {
@@ -74,12 +82,16 @@
 }
 
 .grass {
-  background-color: variables.$greyDefault;
-  background-image: url('../assets/grass.jpg');
+  background-color: $greyDefault;
+  background-image: url("../assets/grass.jpg");
   background-size: contain;
   background-position: center center;
 
   &:active {
-    background-image: url('./assets/variant-grass.jpg');
+    background-image: url("./assets/variant-grass.jpg");
   }
+}
+
+.teste {
+  background: red;
 }

@@ -7,11 +7,12 @@ import { Slot } from "@radix-ui/react-slot";
 export const Button = (props: ButtonProps) => {
   const Comp = props.asChild ? Slot : "button";
 
-  const btnClasses = classNames({
+  const btnClasses = classNames(props.className, {
     [scss.defaultBtn]: !props.variant,
     [scss.grass]: props.variant === "grass",
     [scss.outline]: props.variant === "outline",
     [scss.none]: props.variant === "none",
+    [scss.defaultBtn]: !props.variant && !props.className,
   });
 
   function handleClickCapture() {
