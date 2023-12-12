@@ -13,7 +13,6 @@
   white-space: nowrap;
   font-size: 2.4rem;
   padding: 0.5rem 1rem;
-  min-width: 9.6rem;
   border-radius: 2px;
 
   &[data-nofullscreen="true"] {
@@ -41,6 +40,7 @@
 }
 
 .defaultBtn {
+  border: 3px solid $fontDisable;
   background: $bgChecked;
 }
 
@@ -89,6 +89,16 @@
 
   &:active {
     background-image: url("./assets/variant-grass.jpg");
+  }
+}
+
+.rounded {
+  border-radius: 50%;
+  padding: 1rem;
+
+  &:before {
+    content: "";
+    display: none;
   }
 }
 

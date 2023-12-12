@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from ".";
 import scss from "./Button.module.scss";
+import { Arrow } from "../Icons/Arrow/";
 
 const meta = {
   title: "Design System/components/Button",
@@ -14,6 +15,26 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: "minecraft",
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+  },
+};
+
+export const CustomLoading: Story = {
+  args: {
+    isLoading: true,
+    loadingIcon: "loading...",
+  },
+};
+
+export const Rounded: Story = {
+  args: {
+    rounded: true,
+    icon: <Arrow />,
   },
 };
 

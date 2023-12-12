@@ -3,21 +3,35 @@ import scss from "./Button.module.scss";
 import classNames from "classnames";
 import { minecraftClickSound } from "../utils/minecraftClickSound";
 import { Slot } from "@radix-ui/react-slot";
+import { Loading } from "../Icons/Loading/Loading";
 
 export const Button = (props: ButtonProps) => {
   const Comp = props.asChild ? Slot : "button";
 
   const btnClasses = classNames(props.className, {
     [scss.defaultBtn]: !props.variant,
-    [scss.grass]: props.variant === "grass",
-    [scss.outline]: props.variant === "outline",
-    [scss.none]: props.variant === "none",
-    [scss.defaultBtn]: !props.variant && !props.className,
+    [scss[props.variant!]]: props.variant,
+    [scss.rounded]: props.rounded,
+    [scss.defaultBtn]: !props.variant,
   });
 
   function handleClickCapture() {
     minecraftClickSound.play();
   }
+
+  const renderLoading = () => {
+    const defaultLoading = (
+      <Loading size={props.loadingSize} color={props.loadingColor} />
+    );
+    return props.loadingIcon ?? defaultLoading;
+  };
+
+  const renderContent = () => (
+    <>
+      {props.icon && props.icon}
+      {props.children}
+    </>
+  );
 
   return (
     <Comp
@@ -27,7 +41,7 @@ export const Button = (props: ButtonProps) => {
       onClickCapture={handleClickCapture}
       data-nofullscreen={props.noFullScreen}
     >
-      {props.children}
+      {props.isLoading ? renderLoading() : renderContent()}
     </Comp>
   );
 };
