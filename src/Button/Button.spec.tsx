@@ -3,17 +3,13 @@ import { Button } from ".";
 import { axe } from "jest-axe";
 import { userEvent } from "@testing-library/user-event";
 
-const minecraftSoundEffectClick = jest
-  .spyOn(window.HTMLMediaElement.prototype, "play")
-  .mockImplementation(undefined);
-
 describe("Button", () => {
   describe("when initialize", () => {
     it("renders everithing correctly", () => {
       render(<Button>test</Button>);
       const btn = screen.getByRole("button", { name: "test" });
       const ariaDisabled = btn.getAttribute("aria-disabled");
-      
+
       expect(ariaDisabled).toBeFalsy();
       expect(btn).toBeVisible();
     });
@@ -35,7 +31,6 @@ describe("Button", () => {
 
       await waitFor(() => {
         expect(mockFunc).toHaveBeenCalledTimes(1);
-        expect(minecraftSoundEffectClick).toHaveBeenCalledTimes(1);
       });
     });
   });

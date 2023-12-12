@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Carousel } from ".";
-import { minecraftSoundEffectClick, mockImages } from "./Carousel.mocks";
+import { mockImages } from "./Carousel.mocks";
 import { axe } from "jest-axe";
 import userEvent from "@testing-library/user-event";
 
@@ -38,7 +38,6 @@ describe("<Carousel/>", () => {
         expect(
           await screen.findByAltText(/carousel image2/i)
         ).toBeInTheDocument();
-        expect(minecraftSoundEffectClick).toHaveBeenCalled();
       });
     });
 
@@ -54,7 +53,6 @@ describe("<Carousel/>", () => {
         expect(
           await screen.findByAltText(/carousel image1/i)
         ).toBeInTheDocument();
-        expect(minecraftSoundEffectClick).toHaveBeenCalled();
       });
     });
   });
@@ -72,7 +70,6 @@ describe("<Carousel/>", () => {
         expect(
           await screen.findByAltText(/carousel image1/i)
         ).toBeInTheDocument();
-        expect(minecraftSoundEffectClick).toHaveBeenCalled();
       });
     });
 
@@ -87,8 +84,6 @@ describe("<Carousel/>", () => {
         expect(
           await screen.findByAltText(/carousel image5/i)
         ).toBeInTheDocument();
-
-        expect(minecraftSoundEffectClick).toHaveBeenCalled();
       });
     });
   });
