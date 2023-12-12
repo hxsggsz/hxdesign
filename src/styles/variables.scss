@@ -1,11 +1,21 @@
-$fontFamily: 'MinecraftiaRegular';
+$fontFamily: "Poppins", sans-serif;
+
+$rounded-sm: 4px;
+$rounded-md: 8px;
+$rounded-lg: 12px;
+$rounded-xl: 24px;
+
+$shadow-sm: 0px 10px 15px 0px rgba(211, 192, 214, 0.4);
+$shadow-md: 0px 8px 16px 0px rgba(62, 19, 77, 0.6);
+$shadow-lg: 0px 8px 30px 0px rgba(62, 19, 77, 0.6);
+$shadow-xl: 0px 8px 30px 0px rgba(62, 19, 77, 0.9);
 
 $outlineColor: #fff200;
-$black: #000000;
+// $black: #000000;
 $white: #ffffff;
 $minecraftBrown: #b7865d;
 
-$greyDefault: #4D4D4D;
+$greyDefault: #4d4d4d;
 $greyGradient: #5e5b5b;
 $darkGrey: #333333;
 $blueGradientHover: #586195;
@@ -25,3 +35,22 @@ $lineCenterChecked: #7f7d7e;
 $lineCenterActive: #14620c;
 $bgActive: #4b8833;
 $btnActive: #3da01a;
+
+$black: #1a141f;
+
+$purple: #9d3fe7;
+$purple-hover: #ae60eb;
+$purple-active: #6a17ab;
+$hint-text: #4b3a5a;
+
+$border: #aba7af;
+$disabled: #d4d2d5;
+$spacer: #d9d1e0;
+$spacer-light: #e5e0eb;
+$bg-light-grey: #f5f3f7;
+$white: #ffffff;
+
+$error: #d51a52;
+$attention: #ff9500;
+$approval: #00b998;
+$link: #0f0bab;

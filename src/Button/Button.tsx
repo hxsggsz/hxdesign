@@ -1,27 +1,25 @@
 import { ButtonProps } from "./Button.types";
 import scss from "./Button.module.scss";
 import classNames from "classnames";
-import { minecraftClickSound } from "../utils/minecraftClickSound";
 import { Slot } from "@radix-ui/react-slot";
 import { Loading } from "../Icons/Loading/Loading";
 
-export const Button = (props: ButtonProps) => {
+export const Button = ({ size = "large", ...props }: ButtonProps) => {
   const Comp = props.asChild ? Slot : "button";
 
-  const btnClasses = classNames(props.className, {
-    [scss.defaultBtn]: !props.variant,
-    [scss[props.variant!]]: props.variant,
+  const btnClasses = classNames(props.className, [scss.default], {
+    [scss[size!]]: size,
     [scss.rounded]: props.rounded,
-    [scss.defaultBtn]: !props.variant,
+    [scss.primary]: !props.variant,
+    [scss[props.variant!]]: props.variant,
   });
-
-  function handleClickCapture() {
-    minecraftClickSound.play();
-  }
 
   const renderLoading = () => {
     const defaultLoading = (
-      <Loading size={props.loadingSize} color={props.loadingColor} />
+      <Loading
+        size={props.loadingSize}
+        color={props.variant === "outline" ? "#9d3fe7" : "#fff"}
+      />
     );
     return props.loadingIcon ?? defaultLoading;
   };
@@ -38,7 +36,6 @@ export const Button = (props: ButtonProps) => {
       {...props}
       className={btnClasses}
       aria-disabled={props.disabled}
-      onClickCapture={handleClickCapture}
       data-nofullscreen={props.noFullScreen}
     >
       {props.isLoading ? renderLoading() : renderContent()}

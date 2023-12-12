@@ -7,7 +7,6 @@ export const Loading = ({ size = 24, color }: LoadingProps) => {
       width={size}
       height={size}
       viewBox="0 0 38 38"
-      style={{ paddingBottom: "6px" }}
       xmlns="http://www.w3.org/2000/svg"
     >
       <Button>teste</Button>
