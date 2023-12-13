@@ -1,41 +1,32 @@
-@use "../styles/variables";
+@use "../styles/variables" as *;
 @use "../styles/base.scss";
 
 .wrapper {
   max-width: 42rem;
-  
+
   .list {
-    transition: 100ms ease-in-out;
-    background: variables.$black;
+    transition: 350ms ease-in-out;
     display: flex;
     flex-direction: column;
-    border: 4px solid variables.$greyDefault;
-    border-top: 0;
+    border: 1px solid $spacer-light;
     overflow-x: hidden;
-    
-    &[data-open=true] {
-      // border: 4px solid variables.$white;
-      border-top: 0;
-    }
-    
+
     .item {
+      border: 1px solid $spacer-light;
       transition: 100ms ease-in-out;
       padding: 0.4rem 0.6rem;
       cursor: pointer;
       font-size: 2.4rem;
+      color: $black;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      
-      &[data-open=true] {
-        border-bottom: 4px solid variables.$greyDefault;
+
+      &:focus-within,
+      &:hover {
+        background: $purple;
+        color: $white;
       }
-      
-      &:focus-within, &:hover {
-        background: variables.$white;
-        color: variables.$black;
-      }
-    
 
       &:last-child {
         border-bottom: none;

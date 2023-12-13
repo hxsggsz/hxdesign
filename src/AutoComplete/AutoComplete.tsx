@@ -1,12 +1,11 @@
 import { useMemo, useState } from "react";
 import { Input } from "../Input";
 import scss from "./AutoComplete.module.scss";
-import { Arrow } from "../Icons/Arrow/Arrow";
-import { Close } from "../Icons/Close/Close";
 import { Button } from "../Button";
 import { AutoCompleteProps, ListProps } from "./AutoComplete.types";
 import useClickOutside from "../utils/hooks/useClickOutside";
 import { useRovingTabIndex } from "@20i/use-roving-tabindex-a11y";
+import { MagnifyingGlass, X } from "@phosphor-icons/react";
 
 export const AutoComplete = (props: AutoCompleteProps) => {
   const [search, setSearch] = useState("");
@@ -100,11 +99,10 @@ export const AutoComplete = (props: AutoCompleteProps) => {
     <div ref={ref} onKeyDown={handleKeyDown} className={scss.wrapper}>
       <Input.Root>
         <Input.Actions>
-          <Arrow variant outline orientation={`${isOpen ? "down" : "up"}`} />
+          <MagnifyingGlass size={24} />
         </Input.Actions>
         <Input.Input
           id="cb1-input"
-          fontSize={2.4}
           value={search}
           role="combobox"
           spellCheck="false"
@@ -128,7 +126,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
               aria-controls="cb1-listbox"
               aria-label="clear search"
             >
-              <Close size={32} variant />
+              <X size={24} />
             </Button>
           )}
         </Input.Actions>

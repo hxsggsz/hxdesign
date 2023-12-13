@@ -1,29 +1,27 @@
+/* eslint-disable react-refresh/only-export-components */
 import classNames from "classnames";
 import scss from "./Input.module.scss";
-import { InputProps } from "./Input.types";
+import { InputProps, LabelProps } from "./Input.types";
 
-const Root = ({
-  children,
-  variant,
-}: {
-  children: React.ReactNode;
-  variant?: boolean;
-}) => {
-  const inputClasses = classNames({
-    [scss.input]: !variant,
-    [scss.inputVariant]: variant,
-  });
+const Root = (props: LabelProps) => {
+  const rootClasses = classNames(props.className, [scss.root]);
 
-  return <label className={inputClasses}>{children}</label>;
+  return (
+    <label {...props} data-error={!!props.errorMessage} className={rootClasses}>
+      {props.children}
+      {props.errorMessage && (
+        <span className={scss.error}>{props.errorMessage}</span>
+      )}
+    </label>
+  );
 };
 
-const RealInput = ({ fontSize = 1.6, ...props }: InputProps) => (
+const RealInput = (props: InputProps) => (
   <input
     {...props}
     aria-label="input text"
     className={scss.hidden}
     aria-disabled={props.disabled}
-    style={{ fontSize: `${fontSize}rem` }}
   />
 );
 

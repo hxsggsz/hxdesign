@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from "react";
-import { minecraftClickSound } from "../../utils/minecraftClickSound";
 
 export const useCarousel = (images: string[]) => {
   const [selectedItem, setSelectedItem] = useState(0);
@@ -10,7 +9,6 @@ export const useCarousel = (images: string[]) => {
 
   function updateSelectedImage(index: number) {
     setSelectedItem(index);
-    minecraftClickSound.play();
   }
 
   function updateHover() {

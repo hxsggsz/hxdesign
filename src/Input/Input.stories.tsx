@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Input } from ".";
 import { Button } from "../Button";
-import { Arrow } from "../Icons/Arrow/Arrow";
+import { Lock } from "@phosphor-icons/react";
 
 const meta = {
   title: "Design System/components/Input",
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Input.Root>;
 
 export const Primary: Story = {
   args: {
-    children: <Input.Input />,
+    children: <Input.Input placeholder="placeholder" />,
   },
 };
 
@@ -23,12 +23,16 @@ export const Actions: Story = {
     children: [
       <>
         <Input.Actions>
-          <Arrow size={32} outline />
+          <Lock size={32} />
         </Input.Actions>
-        <Input.Input />
+        <Input.Input placeholder="placeholder" />
         <Input.Actions>
-          <Button>click 1</Button>
-          <Button>click 2</Button>
+          <Button size="small" variant="none">
+            click 1
+          </Button>
+          <Button size="small" variant="none">
+            click 2
+          </Button>
         </Input.Actions>
       </>,
     ],
@@ -37,12 +41,16 @@ export const Actions: Story = {
 
 export const Disabled: Story = {
   args: {
-    children: <Input.Input disabled />,
+    children: <Input.Input placeholder="placeholder" disabled />,
   },
 };
 
-export const CustomFontSize: Story = {
+export const Error: Story = {
   args: {
-    children: <Input.Input fontSize={1.8} />,
+    children: [
+      <Input.Root errorMessage="error!!!">
+        <Input.Input placeholder="placeholder" />
+      </Input.Root>,
+    ],
   },
 };

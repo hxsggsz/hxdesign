@@ -1,11 +1,9 @@
-import { minecraftClickSound } from "../utils/minecraftClickSound";
 import scss from "./Switch.module.scss";
 import { SwitchProps } from "./Switch.types";
 import classNames from "classnames";
 
 export const Switch = (props: SwitchProps) => {
   function handleSwitch() {
-    minecraftClickSound.play();
     props.setChecked((prev) => !prev);
   }
 
