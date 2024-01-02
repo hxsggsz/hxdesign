@@ -96,7 +96,7 @@ export const AutoComplete = (props: AutoCompleteProps) => {
   );
 
   return (
-    <div ref={ref} onKeyDown={handleKeyDown} className={scss.wrapper}>
+    <div ref={ref} onKeyDown={handleKeyDown}>
       <Input.Root>
         <Input.Actions>
           <MagnifyingGlass size={24} />
@@ -106,10 +106,10 @@ export const AutoComplete = (props: AutoCompleteProps) => {
           value={search}
           role="combobox"
           spellCheck="false"
-          aria-expanded={isOpen}
           autoComplete="off"
-          aria-autocomplete="list"
+          aria-expanded={isOpen}
           onChange={handleChange}
+          aria-autocomplete="list"
           aria-controls="cb1-listbox"
           aria-label="input for search"
           onClick={() => handleOpen()}
@@ -118,15 +118,16 @@ export const AutoComplete = (props: AutoCompleteProps) => {
         <Input.Actions>
           {search && (
             <Button
-              id="cb1-button"
+              size="none"
               variant="none"
+              id="cb1-button"
               onClick={clearInput}
               aria-expanded={isOpen}
               data-testid="btn-clear"
-              aria-controls="cb1-listbox"
               aria-label="clear search"
+              aria-controls="cb1-listbox"
             >
-              <X size={24} />
+              <X color="black" size={24} />
             </Button>
           )}
         </Input.Actions>

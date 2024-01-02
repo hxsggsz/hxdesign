@@ -12,31 +12,46 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    placeholder: "Minecraft streamers",
+    placeholder: "Awesome placeholder",
     list: [
       {
         id: 1,
-        item: "Quackity, the creator of QSMP",
+        item: "item 1",
+        onSelect: (item: string) => alert(`selected: ${item}`),
+      },
+      {
+        id: 1,
+        item: "item 10",
+        onSelect: (item: string) => alert(`selected: ${item}`),
+      },
+      {
+        id: 1,
+        item: "item 20",
+        onSelect: (item: string) => alert(`selected: ${item}`),
+      },
+      {
+        id: 1,
+        item: "item 30",
         onSelect: (item: string) => alert(`selected: ${item}`),
       },
       {
         id: "dwadwadwa",
-        item: "FoolishG",
+        item: "item 40",
         onSelect: (item: string) => alert(`selected: ${item}`),
       },
       {
         id: 2,
-        item: "BadBoyHalo",
+        item: "item 3",
         onSelect: (item: string) => alert(`selected: ${item}`),
       },
       {
         id: 3,
-        item: "JaidenAnimations",
+        item: "item 4",
         onSelect: (item: string) => alert(`selected: ${item}`),
       },
       {
         id: 5,
-        item: "Cellbit",
+        item: "item 5",
         onSelect: (item: string) => alert(`selected: ${item}`),
       },
     ],

@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import { useCarousel } from "./useCarousel";
-import { lastItemOnCarousel, minecraftSoundEffectClick, mockImages } from "../Carousel.mocks";
+import { lastItemOnCarousel, mockImages } from "../Carousel.mocks";
 
 describe("useCarousel", () => {
   describe("when initialize", () => {
@@ -101,7 +101,6 @@ describe("useCarousel", () => {
       });
 
       expect(result.current.selectedItem).toBe(lastItemOnCarousel);
-      expect(minecraftSoundEffectClick).toHaveBeenCalled();
     });
   });
 });

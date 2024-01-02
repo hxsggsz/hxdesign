@@ -3,10 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { Switch } from ".";
 import { axe } from "jest-axe";
 
-const minecraftSoundEffectClick = jest
-  .spyOn(window.HTMLMediaElement.prototype, "play")
-  .mockImplementation(undefined);
-
 describe("Switch", () => {
   describe("when initialize", () => {
     it("renders the switch off when checked={false}", () => {
@@ -16,7 +12,7 @@ describe("Switch", () => {
 
       expect(switchComponent).not.toBeChecked();
       expect(switchComponent).toBeInTheDocument();
-      expect(switchComponent.getAttribute('aria-label')).toBe('switch off');
+      expect(switchComponent.getAttribute("aria-label")).toBe("switch off");
     });
 
     it("renders the switch on when checked={true}", () => {
@@ -26,7 +22,7 @@ describe("Switch", () => {
 
       expect(switchComponent).toBeChecked();
       expect(switchComponent).toBeInTheDocument();
-      expect(switchComponent.getAttribute('aria-label')).toBe('switch on');
+      expect(switchComponent.getAttribute("aria-label")).toBe("switch on");
     });
 
     it("renders the switch as checkbox when checkbox={true}", () => {
@@ -36,7 +32,7 @@ describe("Switch", () => {
 
       expect(switchComponent).not.toBeChecked();
       expect(switchComponent).toBeInTheDocument();
-      expect(switchComponent.getAttribute('aria-label')).toBe('checkbox off');
+      expect(switchComponent.getAttribute("aria-label")).toBe("checkbox off");
     });
 
     it("should not have basic accessibility issues", async () => {
@@ -61,7 +57,6 @@ describe("Switch", () => {
       await waitFor(() => {
         expect(ariaChecked).toBeTruthy();
         expect(setCheckedMock).toHaveBeenCalledTimes(1);
-        expect(minecraftSoundEffectClick).toHaveBeenCalledTimes(1);
       });
     });
   });

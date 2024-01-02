@@ -11,5 +11,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loadingColor?: string;
   loadingSize?: number;
   variant?: "grass" | "slider" | "outline" | "none";
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "none";
 }
