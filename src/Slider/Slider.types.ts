@@ -1,7 +1,7 @@
 export interface SliderProps {
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
+  orientation: "horizontal" | "vertical";
   defaultValue?: number;
-  sliderValue: number | undefined;
-  setSliderValue: React.Dispatch<React.SetStateAction<number>> | undefined;
+  setSliderValue: React.Dispatch<React.SetStateAction<number>>;
 }
