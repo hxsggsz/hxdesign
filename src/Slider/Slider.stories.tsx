@@ -17,7 +17,7 @@ const PrimaryComponent = (props: Omit<SliderProps, "setSliderValue">) => {
   return (
     <>
       <h1>{value}</h1>
-      <Slider setSliderValue={setValue} {...props} />;
+      <Slider setSliderValue={setValue} {...props} />
     </>
   );
 };

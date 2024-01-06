@@ -61,8 +61,9 @@ export const Slider = ({
       className={scss.slider}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
-      style={getBackgroundSize(value)}
+      data-orientation={orientation}
       aria-orientation={orientation}
+      style={getBackgroundSize(value)}
     />
   );
 };
