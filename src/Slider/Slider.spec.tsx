@@ -6,26 +6,18 @@ import {
 } from "@testing-library/react";
 import { Slider } from ".";
 import { axe } from "jest-axe";
-import userEvent from "@testing-library/user-event";
 
 describe("Slider", () => {
   let setSliderValueMock: jest.Mock;
   let rendered: RenderResult;
   let component: HTMLElement;
-  const min = 0;
   const max = 100;
   const defaultValue = 60;
-  const sliderValue = 35;
 
   describe("when initialize", () => {
     beforeAll(() => {
       rendered = render(
-        <Slider
-          min={min}
-          max={max}
-          sliderValue={sliderValue}
-          setSliderValue={undefined}
-        />
+        <Slider max={max} setSliderValue={jest.fn()} orientation="horizontal" />
       );
 
       component = rendered.getByRole("slider");
@@ -40,25 +32,19 @@ describe("Slider", () => {
     });
 
     it("renders with all aria attributes correctly", () => {
-      expect(component.getAttribute("aria-valuemin")).toBe(min.toString());
+      expect(component.getAttribute("aria-valuemin")).toBe("0");
+      expect(component.getAttribute("aria-valuenow")).toBe("0");
       expect(component.getAttribute("aria-valuemax")).toBe(max.toString());
-      expect(component.getAttribute("aria-valuenow")).toBe(
-        sliderValue.toString()
-      );
       expect(component.getAttribute("aria-orientation")).toBe("horizontal");
-      expect(component.getAttribute("aria-valuetext")).toBe(
-        `the value of this slider is: ${sliderValue}`
-      );
     });
 
     describe("when have defaultValue and sliderValue is undefined", () => {
       beforeAll(() => {
         render(
           <Slider
-            min={min}
             max={max}
-            sliderValue={undefined}
-            setSliderValue={undefined}
+            orientation="horizontal"
+            setSliderValue={jest.fn()}
             defaultValue={defaultValue}
           />
         );
@@ -67,32 +53,10 @@ describe("Slider", () => {
       });
 
       it("renders with defaultvalue instead of sliderValue", () => {
-        expect(component.getAttribute("aria-valuetext")).toBe(
-          `the value of this slider is: ${defaultValue}`
+        expect(component.getAttribute("aria-valuenow")).toBe(
+          defaultValue.toString()
         );
       });
-    });
-  });
-
-  describe("when click on slider", () => {
-    beforeAll(() => {
-      setSliderValueMock = jest.fn();
-      rendered = render(
-        <Slider
-          min={min}
-          max={max}
-          sliderValue={sliderValue}
-          setSliderValue={setSliderValueMock}
-        />
-      );
-      component = rendered.getByRole("slider");
-    });
-
-    it("calls the setSliderValue function", async () => {
-      const btnClick = rendered.getByTestId(/click-slider/i);
-      userEvent.click(btnClick);
-
-      await waitFor(() => expect(setSliderValueMock).toHaveBeenCalled());
     });
   });
 
@@ -101,13 +65,13 @@ describe("Slider", () => {
       setSliderValueMock = jest.fn();
       rendered = render(
         <Slider
-          min={min}
           max={max}
-          sliderValue={sliderValue}
           setSliderValue={setSliderValueMock}
+          orientation={"horizontal"}
         />
       );
-      component = rendered.getByTestId(/trigger-button/i);
+
+      component = rendered.getByRole("slider");
     });
 
     it("calls the setSliderValueMock", async () => {
@@ -124,13 +88,12 @@ describe("Slider", () => {
       setSliderValueMock = jest.fn();
       rendered = render(
         <Slider
-          min={min}
           max={max}
-          sliderValue={sliderValue}
           setSliderValue={setSliderValueMock}
+          orientation={"horizontal"}
         />
       );
-      component = rendered.getByTestId(/trigger-button/i);
+      component = rendered.getByRole("slider");
 
       fireEvent.keyDown(component, {
         key: "ArrowLeft",

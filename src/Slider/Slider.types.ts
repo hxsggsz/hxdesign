@@ -1,5 +1,4 @@
 export interface SliderProps {
-  min?: number;
   max?: number;
   orientation: "horizontal" | "vertical";
   defaultValue?: number;

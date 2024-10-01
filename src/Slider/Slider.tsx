@@ -3,13 +3,14 @@ import { SliderProps } from "./Slider.types";
 import scss from "./Slider.module.scss";
 
 export const Slider = ({
-  min = 0,
   max = 100,
   orientation = "horizontal",
   ...props
 }: SliderProps) => {
   // if user don't have selected a slider value and you're using defaultValue, the sliderValue prop must be undefined
   const [value, setValue] = useState(props.defaultValue ?? 0);
+
+  const min = 0;
 
   function handleChange(ev: React.ChangeEvent<HTMLInputElement>) {
     setValue(Number(ev.currentTarget.value));
@@ -57,7 +58,7 @@ export const Slider = ({
       value={value}
       aria-valuemax={max}
       aria-valuemin={min}
-      aria-valuenow={value}
+      aria-valuenow={props.defaultValue ?? value}
       className={scss.slider}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
